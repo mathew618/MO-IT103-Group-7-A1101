@@ -24,12 +24,6 @@ public class Group7CompProg {
                 case 1:
                     bread.read();
                     break;
-                /*case 2:
-                    System.out.print("Who we tickling?: ");
-                    int tickle = scan.nextInt();
-                    scan.nextLine();
-                    bread.select(tickle);
-                    break;*/
                 case 2:
                     System.out.println("Add Employee"); // finish later
                     break;
@@ -48,8 +42,8 @@ public class Group7CompProg {
     }
     
     private static boolean admin() {
-        String name = "fidel";
-        String pw = "amen";
+        String name = "MotorPHAdmin";
+        String pw = "Broom890";
         System.out.println("LOGIN");
         
         for (int i = 3; i > 0; i--) {
@@ -136,4 +130,5 @@ class CheckEmp {
             System.out.println("Oops. wrong number. I think.");
         }
     }*/
+    
 }
