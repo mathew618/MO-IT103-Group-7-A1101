@@ -28,7 +28,10 @@ public class Group7CompProg {
                     System.out.println("Add Employee"); // finish later
                     break;
                 case 3:
-                    System.out.println("Remove Employee"); // finish later
+                    System.out.print("Remove Employee Number: "); // finish later
+                    int pick = scan.nextInt();
+                    scan.nextLine();
+                    bread.select(pick);
                     break;
                 case 4:
                     System.out.println("Exiting...");
@@ -73,7 +76,7 @@ class Iforgor {
         this.name = name;
         this.age = age;
         this.position = position;
-    }
+    }   
 }
 
 class CheckEmp {
@@ -114,21 +117,15 @@ class CheckEmp {
             }
         }
     }
-    /*
     public void select(int rowNumber) {
         if (rowNumber > 0 && rowNumber <= banana.size()) {
             Iforgor er = banana.get(rowNumber - 1);
-            int result = Math.random() < 0.5 ? 0 : 1;
-            if (result == 0) {
-                System.out.print("You tickled: " + er.name);
-            } else {
-                System.out.println("You tickled " + er.name + " too much. he died. ;[[");
-                banana.remove(rowNumber - 1);
-            }
+            System.out.println("\nRemoved Employe: " + er.name);
+            banana.remove(rowNumber - 1);
             
         } else {
             System.out.println("Oops. wrong number. I think.");
         }
-    }*/
+    }
     
 }
