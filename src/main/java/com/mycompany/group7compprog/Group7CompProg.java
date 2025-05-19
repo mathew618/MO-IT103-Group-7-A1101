@@ -1,6 +1,8 @@
 package com.mycompany.group7compprog;
 import java.io.*;
 import java.util.*;
+import javax.swing.*;
+import java.awt.*;
 
 public class Group7CompProg {
     static Scanner scan = new Scanner(System.in);
@@ -9,10 +11,13 @@ public class Group7CompProg {
         bread.check();
         boolean wood = true;
         
-        if (!admin()) {
+        new Login().setVisible(true);
+        
+        
+        /*if (!admin()) {
             System.out.println("");
             return;
-        }
+        }*/
         
         while (wood) {
             System.out.println("\n1. View Employees\n2. Add Employee\n3. Remove Employee\n4. Exit");
@@ -26,6 +31,7 @@ public class Group7CompProg {
                     break;
                 case 2:
                     System.out.println("Add Employee"); // finish later
+                    bread.show();
                     break;
                 case 3:
                     System.out.print("Remove Employee Number: "); // finish later
@@ -80,7 +86,7 @@ class Iforgor {
 }
 
 class CheckEmp {
-    private final List<Iforgor> banana = new ArrayList<>();
+    private final ArrayList<Iforgor> banana = new ArrayList<>();
     
     public void check() {
         String file = "yes.csv";
@@ -126,6 +132,33 @@ class CheckEmp {
         } else {
             System.out.println("Oops. wrong number. I think.");
         }
+    }
+    
+    //Show Employees Test
+    public void show() {
+        JFrame frame = new JFrame("Item List");
+        frame.setSize(600, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(banana.size(), 1));
+        
+        for (Iforgor item : banana) {
+            JPanel panel = new JPanel();
+            panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+            panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            
+            JLabel label = new JLabel("Name: " + item.name + ", Age: " + item.age + ", Position: " + item.position, SwingConstants.CENTER);
+            JButton button = new JButton("Tickle");
+            JButton pay = new JButton("Pay");
+            button.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Tickled " + item.name));
+            
+            panel.add(label);
+            panel.add(button);
+            panel.add(pay);
+            
+            frame.add(panel);
+        }
+        
+        frame.setVisible(true);
     }
     
 }
