@@ -45,32 +45,33 @@ public class Attendance extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(f2, "CSV file not found or couldn't load.");
         }
         
-        jComboBox1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selected = (String) jComboBox1.getSelectedItem();
-                TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-                jTable1.setRowSorter(sorter);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+        String selected = (String) jComboBox1.getSelectedItem();
 
-                if ("All".equals(selected)) {
-                    sorter.setRowFilter(null);
-                } else {
-                    int monthIndex = jComboBox1.getSelectedIndex();
-                    sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
-                        @Override
-                        public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
-                            try {
-                                String dateString = entry.getStringValue(2);
-                                LocalDate date = LocalDate.parse(dateString);
-                                return date.getMonthValue() == monthIndex;
-                            } catch (Exception ex) {
-                                return false;
-                            }
-                        }
-                    });
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
+        jTable1.setRowSorter(sorter);  // IMPORTANT!
+
+        if ("All".equals(selected)) {
+            sorter.setRowFilter(null);
+        } else {
+            int monthIndex = jComboBox1.getSelectedIndex(); // Jan=1, Feb=2, etc.
+
+            sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
+                public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
+                    try {
+                        String dateString = entry.getStringValue(2); // 3rd column (Date)
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+                        LocalDate date = LocalDate.parse(dateString, formatter);
+                        return date.getMonthValue() == monthIndex;
+                    } catch (Exception e) {
+                        return false; // skip rows with bad date
+                    }
                 }
-            }
-        });
+            });
+        }
+    }
+});
 
         logIN.addActionListener(e -> {
             String name = jTextField2.getText().trim();
