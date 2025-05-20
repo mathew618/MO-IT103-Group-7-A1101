@@ -4,6 +4,19 @@
  */
 package com.mycompany.group7compprog;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author mathe
@@ -15,7 +28,92 @@ public class Attendance extends javax.swing.JPanel {
      */
     public Attendance() {
         initComponents();
+        DefaultTableModel model = new DefaultTableModel(
+    new Object[]{"Date", "Employee", "Time In", "Time Out"}, 0);
+    jTable1.setModel(model);
+    
+    jComboBox1.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String selected = (String) jComboBox1.getSelectedItem();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
+        jTable1.setRowSorter(sorter);
+
+        if ("All".equals(selected)) {
+            sorter.setRowFilter(null);
+        } else {
+            int monthIndex = jComboBox1.getSelectedIndex(); 
+            sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
+                @Override
+                public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
+                    try {
+                        String dateString = entry.getStringValue(2); 
+                        LocalDate date = LocalDate.parse(dateString);
+                        return date.getMonthValue() == monthIndex;
+                    } catch (Exception ex) {
+                        return false;
+                    }
+                }}); }}});
+
+try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv"))) {
+    String line;
+    while ((line = br.readLine()) != null) {
+        String[] data = line.split(",");
+        if (data.length == 5) {
+            model.addRow(data);
+        }
     }
+} catch (IOException ex) {
+    JOptionPane.showMessageDialog(f2, "CSV file not found or couldn't load.");
+}
+    
+    logIN.addActionListener(e -> { 
+    String name = jTextField2.getText().trim();
+    if (name.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter employee name.");
+        return;
+    }
+
+    LocalDate date = LocalDate.now();
+    LocalTime timeIn = LocalTime.now();
+
+    model.addRow(new Object[]{
+        date.toString(),
+        name,
+        timeIn.format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+        "" 
+    });
+    jTextField2.setText(""); 
+});
+
+    logOut.addActionListener(e -> { 
+    String name = jTextField2.getText().trim();
+    if (name.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Please enter employee name.");
+        return;
+    }
+
+    LocalDate today = LocalDate.now();
+    LocalTime timeOut = LocalTime.now();
+
+    for (int i = 0; i < model.getRowCount(); i++) {
+        String rowDate = model.getValueAt(i, 0).toString();
+        String rowName = model.getValueAt(i, 1).toString();
+        String rowTimeOut = model.getValueAt(i, 3).toString();
+
+        if (rowDate.equals(today.toString()) &&
+            rowName.equals(name) &&
+            rowTimeOut.isEmpty()) {
+            model.setValueAt(timeOut.format(DateTimeFormatter.ofPattern("HH:mm:ss")), i, 3);
+            JOptionPane.showMessageDialog(null, "Logged out successfully!");
+            jTextField2.setText("");
+            return;
+        }
+    }
+    JOptionPane.showMessageDialog(null, "No matching login record found for logout.");
+});
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,39 +126,19 @@ public class Attendance extends javax.swing.JPanel {
 
         f2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
+        logIN = new javax.swing.JButton();
+        logOut = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         f2.setBackground(new java.awt.Color(255, 204, 255));
 
         jLabel4.setBackground(new java.awt.Color(204, 102, 0));
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
-        jLabel4.setText("• DASHBOARDS");
-
-        jList1.setBackground(new java.awt.Color(255, 234, 234));
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { " " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
-
-        jLabel6.setFont(new java.awt.Font("Bahnschrift", 1, 22)); // NOI18N
-        jLabel6.setText("• PAYROLLS");
-
-        jTextField1.setBackground(new java.awt.Color(221, 238, 255));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Bahnschrift", 1, 22)); // NOI18N
-        jLabel10.setText("• ATTENDANCE");
+        jLabel4.setText("• ATTENDANCE");
 
         jTextField2.setBackground(new java.awt.Color(221, 238, 255));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -69,86 +147,128 @@ public class Attendance extends javax.swing.JPanel {
             }
         });
 
+        logIN.setText("Log-In");
+        logIN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logINActionPerformed(evt);
+            }
+        });
+
+        logOut.setText("Log-Out");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Date", "Name", "Time-In", "Time-Out"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel1.setText("Enter Employee Name:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+
         javax.swing.GroupLayout f2Layout = new javax.swing.GroupLayout(f2);
         f2.setLayout(f2Layout);
         f2Layout.setHorizontalGroup(
             f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
-            .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(f2Layout.createSequentialGroup()
-                    .addGap(27, 27, 27)
-                    .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(f2Layout.createSequentialGroup()
-                            .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6))
-                            .addGap(28, 28, 28)
-                            .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel10)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(28, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, f2Layout.createSequentialGroup()
+                .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(f2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(f2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(f2Layout.createSequentialGroup()
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(f2Layout.createSequentialGroup()
+                                .addComponent(logIN)
+                                .addGap(45, 45, 45)
+                                .addComponent(logOut)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(19, 19, 19))
+            .addGroup(f2Layout.createSequentialGroup()
+                .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(f2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(f2Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         f2Layout.setVerticalGroup(
             f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
-            .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(f2Layout.createSequentialGroup()
-                    .addGap(22, 22, 22)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(9, 9, 9)
-                    .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel6))
-                    .addGap(6, 6, 6)
-                    .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(23, Short.MAX_VALUE)))
+            .addGroup(f2Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(4, 4, 4)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(logIN)
+                    .addComponent(logOut)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(f2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(f2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(f2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(f2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
+    
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void logINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logINActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logINActionPerformed
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel f2;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton logIN;
+    private javax.swing.JButton logOut;
     // End of variables declaration//GEN-END:variables
 }
