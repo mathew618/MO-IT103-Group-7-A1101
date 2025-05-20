@@ -8,12 +8,12 @@ package com.mycompany.group7compprog;
  *
  * @author mathe
  */
-public class Employees extends javax.swing.JPanel {
+public class Salary extends javax.swing.JPanel {
 
     /**
      * Creates new form Employees
      */
-    public Employees() {
+    public Salary() {
         initComponents();
     }
 
@@ -30,9 +30,9 @@ public class Employees extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
 
-        f1.setBackground(new java.awt.Color(153, 153, 255));
+        f1.setBackground(new java.awt.Color(255, 153, 153));
 
-        jLabel5.setText("Employee");
+        jLabel5.setText("Salary");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -77,9 +77,7 @@ public class Employees extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(f1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(f1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

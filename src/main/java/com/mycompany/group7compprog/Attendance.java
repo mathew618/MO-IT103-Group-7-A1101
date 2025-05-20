@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author mathe
@@ -28,92 +29,95 @@ public class Attendance extends javax.swing.JPanel {
      */
     public Attendance() {
         initComponents();
-        DefaultTableModel model = new DefaultTableModel(
-    new Object[]{"Date", "Employee", "Time In", "Time Out"}, 0);
-    jTable1.setModel(model);
-    
-    jComboBox1.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String selected = (String) jComboBox1.getSelectedItem();
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-        jTable1.setRowSorter(sorter);
+        DefaultTableModel model = new DefaultTableModel(new Object[]{"Date", "Employee", "Time In", "Time Out"}, 0);
+        jTable1.setModel(model);
 
-        if ("All".equals(selected)) {
-            sorter.setRowFilter(null);
-        } else {
-            int monthIndex = jComboBox1.getSelectedIndex(); 
-            sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
-                @Override
-                public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
-                    try {
-                        String dateString = entry.getStringValue(2); 
-                        LocalDate date = LocalDate.parse(dateString);
-                        return date.getMonthValue() == monthIndex;
-                    } catch (Exception ex) {
-                        return false;
-                    }
-                }}); }}});
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selected = (String) jComboBox1.getSelectedItem();
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
+                jTable1.setRowSorter(sorter);
 
-try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv"))) {
-    String line;
-    while ((line = br.readLine()) != null) {
-        String[] data = line.split(",");
-        if (data.length == 5) {
-            model.addRow(data);
+                if ("All".equals(selected)) {
+                    sorter.setRowFilter(null);
+                } else {
+                    int monthIndex = jComboBox1.getSelectedIndex();
+                    sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
+                        @Override
+                        public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
+                            try {
+                                String dateString = entry.getStringValue(2);
+                                LocalDate date = LocalDate.parse(dateString);
+                                return date.getMonthValue() == monthIndex;
+                            } catch (Exception ex) {
+                                return false;
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        //*
+        try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 5) {
+                    model.addRow(data);
+                }
+            }
+        } catch (IOException ex) {
+            //JOptionPane.showMessageDialog(f2, "CSV file not found or couldn't load.");
         }
-    }
-} catch (IOException ex) {
-    JOptionPane.showMessageDialog(f2, "CSV file not found or couldn't load.");
-}
-    
-    logIN.addActionListener(e -> { 
-    String name = jTextField2.getText().trim();
-    if (name.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please enter employee name.");
-        return;
-    }
+        //*/
 
-    LocalDate date = LocalDate.now();
-    LocalTime timeIn = LocalTime.now();
+        logIN.addActionListener(e -> {
+            String name = jTextField2.getText().trim();
+            if (name.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please enter employee name.");
+                return;
+            }
 
-    model.addRow(new Object[]{
-        date.toString(),
-        name,
-        timeIn.format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-        "" 
-    });
-    jTextField2.setText(""); 
-});
+            LocalDate date = LocalDate.now();
+            LocalTime timeIn = LocalTime.now();
 
-    logOut.addActionListener(e -> { 
-    String name = jTextField2.getText().trim();
-    if (name.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Please enter employee name.");
-        return;
-    }
-
-    LocalDate today = LocalDate.now();
-    LocalTime timeOut = LocalTime.now();
-
-    for (int i = 0; i < model.getRowCount(); i++) {
-        String rowDate = model.getValueAt(i, 0).toString();
-        String rowName = model.getValueAt(i, 1).toString();
-        String rowTimeOut = model.getValueAt(i, 3).toString();
-
-        if (rowDate.equals(today.toString()) &&
-            rowName.equals(name) &&
-            rowTimeOut.isEmpty()) {
-            model.setValueAt(timeOut.format(DateTimeFormatter.ofPattern("HH:mm:ss")), i, 3);
-            JOptionPane.showMessageDialog(null, "Logged out successfully!");
+            model.addRow(new Object[]{
+                date.toString(),
+                name,
+                timeIn.format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                ""
+            });
             jTextField2.setText("");
-            return;
-        }
+        });
+
+        logOut.addActionListener(e -> {
+            String name = jTextField2.getText().trim();
+            if (name.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please enter employee name.");
+                return;
+            }
+
+            LocalDate today = LocalDate.now();
+            LocalTime timeOut = LocalTime.now();
+
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String rowDate = model.getValueAt(i, 0).toString();
+                String rowName = model.getValueAt(i, 1).toString();
+                String rowTimeOut = model.getValueAt(i, 3).toString();
+
+                if (rowDate.equals(today.toString())
+                        && rowName.equals(name)
+                        && rowTimeOut.isEmpty()) {
+                    model.setValueAt(timeOut.format(DateTimeFormatter.ofPattern("HH:mm:ss")), i, 3);
+                    JOptionPane.showMessageDialog(null, "Logged out successfully!");
+                    jTextField2.setText("");
+                    return;
+                }
+            }
+            JOptionPane.showMessageDialog(null, "No matching login record found for logout.");
+        });
     }
-    JOptionPane.showMessageDialog(null, "No matching login record found for logout.");
-});
-    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -229,27 +233,22 @@ try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv")
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(f2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(f2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(f2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(f2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
@@ -257,7 +256,6 @@ try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv")
     private void logINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logINActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_logINActionPerformed
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
