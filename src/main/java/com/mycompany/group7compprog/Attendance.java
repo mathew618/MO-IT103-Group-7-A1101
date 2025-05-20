@@ -32,6 +32,19 @@ public class Attendance extends javax.swing.JPanel {
         DefaultTableModel model = new DefaultTableModel(new Object[]{"Date", "Employee", "Time In", "Time Out"}, 0);
         jTable1.setModel(model);
 
+        //*
+        try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 5) {
+                    model.addRow(data);
+                }
+            }
+        } catch (IOException ex) {
+            //JOptionPane.showMessageDialog(f2, "CSV file not found or couldn't load.");
+        }
+        
         jComboBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,19 +71,6 @@ public class Attendance extends javax.swing.JPanel {
                 }
             }
         });
-        //*
-        try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length == 5) {
-                    model.addRow(data);
-                }
-            }
-        } catch (IOException ex) {
-            //JOptionPane.showMessageDialog(f2, "CSV file not found or couldn't load.");
-        }
-        //*/
 
         logIN.addActionListener(e -> {
             String name = jTextField2.getText().trim();
@@ -162,17 +162,17 @@ public class Attendance extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Date", "Name", "Time-In", "Time-Out"
+                "Employee Number", "Name", "Date", "Time-In", "Time-Out"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
