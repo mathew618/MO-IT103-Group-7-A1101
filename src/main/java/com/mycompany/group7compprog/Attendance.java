@@ -90,14 +90,17 @@ public class Attendance extends javax.swing.JPanel {
             LocalDate date = LocalDate.now();
             LocalTime timeIn = LocalTime.now();
 
-            model.addRow(new Object[]{
-                date.toString(),
-                name,
-                timeIn.format(DateTimeFormatter.ofPattern("HH:mm:ss")),
-                ""
+            
+            model.addRow(new Object[] {
+                empNo,                                  
+                date.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")), 
+               timeIn.format(DateTimeFormatter.ofPattern("HH:mm:ss")), 
+               ""                                     
             });
-            jTextField2.setText("");
-        });
+
+            jTextField1.setText(""); // Clear employee number field
+            jTextField2.setText(""); // Clear name field
+            });
 
         logOut.addActionListener(e -> {
             String name = jTextField2.getText().trim();
