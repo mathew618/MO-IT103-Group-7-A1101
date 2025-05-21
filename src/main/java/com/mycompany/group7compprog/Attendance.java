@@ -29,7 +29,7 @@ public class Attendance extends javax.swing.JPanel {
      */
     public Attendance() {
         initComponents();
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"Date", "Employee", "Time In", "Time Out"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Employee", "Date", "Time in", "Time Out"}, 0);
         jTable1.setModel(model);
 
         //*
@@ -75,11 +75,18 @@ public class Attendance extends javax.swing.JPanel {
 
         logIN.addActionListener(e -> {
             String name = jTextField2.getText().trim();
-            if (name.isEmpty()) {
+            String empNo = jTextField1.getText().trim();
+            if (name.isEmpty() && empNo.isEmpty()) {
+               JOptionPane.showMessageDialog(null, "Please enter employee name and employee number.");
+                return;
+            } else if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please enter employee name.");
                 return;
+            } else if (empNo.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please enter employee number.");
+                return;
             }
-
+            
             LocalDate date = LocalDate.now();
             LocalTime timeIn = LocalTime.now();
 
@@ -94,11 +101,17 @@ public class Attendance extends javax.swing.JPanel {
 
         logOut.addActionListener(e -> {
             String name = jTextField2.getText().trim();
-            if (name.isEmpty()) {
+            String empNo = jTextField1.getText().trim();
+            if (name.isEmpty() && empNo.isEmpty()) {
+               JOptionPane.showMessageDialog(null, "Please enter employee name and employee number.");
+                return;
+            } else if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please enter employee name.");
                 return;
+            } else if (empNo.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please enter employee number.");
+                return;
             }
-
             LocalDate today = LocalDate.now();
             LocalTime timeOut = LocalTime.now();
 
@@ -138,6 +151,8 @@ public class Attendance extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         f2.setBackground(new java.awt.Color(255, 204, 255));
 
@@ -186,6 +201,10 @@ public class Attendance extends javax.swing.JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
+        jTextField1.setToolTipText("");
+
+        jLabel2.setText("Enter Employee Number:");
+
         javax.swing.GroupLayout f2Layout = new javax.swing.GroupLayout(f2);
         f2.setLayout(f2Layout);
         f2Layout.setHorizontalGroup(
@@ -195,18 +214,22 @@ public class Attendance extends javax.swing.JPanel {
                     .addGroup(f2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(f2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, f2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(f2Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(f2Layout.createSequentialGroup()
                                 .addComponent(logIN)
                                 .addGap(45, 45, 45)
                                 .addComponent(logOut)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(f2Layout.createSequentialGroup()
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(19, 19, 19))
             .addGroup(f2Layout.createSequentialGroup()
                 .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,9 +247,13 @@ public class Attendance extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
                 .addGap(4, 4, 4)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logIN)
@@ -263,9 +290,11 @@ public class Attendance extends javax.swing.JPanel {
     private javax.swing.JPanel f2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton logIN;
     private javax.swing.JButton logOut;
