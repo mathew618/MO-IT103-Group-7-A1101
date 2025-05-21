@@ -116,19 +116,23 @@ public class Attendance extends javax.swing.JPanel {
             LocalTime timeOut = LocalTime.now();
 
             for (int i = 0; i < model.getRowCount(); i++) {
-                String rowDate = model.getValueAt(i, 0).toString();
+                String rowEmpNo = model.getValueAt(i, 0).toString();
                 String rowName = model.getValueAt(i, 1).toString();
-                String rowTimeOut = model.getValueAt(i, 3).toString();
+                String rowDate = model.getValueAt(i, 2).toString();
+                String rowTimeOut = model.getValueAt(i, 4).toString();
 
-                if (rowDate.equals(today.toString())
-                        && rowName.equals(name)
-                        && rowTimeOut.isEmpty()) {
-                    model.setValueAt(timeOut.format(DateTimeFormatter.ofPattern("HH:mm:ss")), i, 3);
-                    JOptionPane.showMessageDialog(null, "Logged out successfully!");
-                    jTextField2.setText("");
-                    return;
-                }
+            if (rowDate.equals(today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")))
+                && rowName.equals(name)
+                && rowEmpNo.equals(empNo)
+                && rowTimeOut.isEmpty()) {
+
+            model.setValueAt(timeOut.format(DateTimeFormatter.ofPattern("HH:mm:ss")), i, 4);
+                JOptionPane.showMessageDialog(null, "Logged out successfully!");
+                jTextField2.setText("");
+                jTextField1.setText("");
+                return;
             }
+        }
             JOptionPane.showMessageDialog(null, "No matching login record found for logout.");
         });
     }
