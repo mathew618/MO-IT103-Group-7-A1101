@@ -21,6 +21,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author mathe
  */
+
 public class Attendance extends javax.swing.JPanel {
 
     /**
@@ -272,28 +273,27 @@ public class Attendance extends javax.swing.JPanel {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String selected = (String) jComboBox1.getSelectedItem();
 
-    TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-    jTable1.setRowSorter(sorter);  // important!
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
+        jTable1.setRowSorter(sorter);  // important!
 
-    if ("All".equals(selected)) {
-        sorter.setRowFilter(null);
-    } else {
-        int monthIndex = jComboBox1.getSelectedIndex() - 1; // Subtract 1 for Jan = 0
+        if ("All".equals(selected)) {
+            sorter.setRowFilter(null);
+        } else {
+            int monthIndex = jComboBox1.getSelectedIndex() - 1; // Subtract 1 for Jan = 0
 
-        sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
-            public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
-                try {
-                    String dateString = entry.getStringValue(2); // 3rd column = Date
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
-                    LocalDate date = LocalDate.parse(dateString, formatter);
-                    return date.getMonthValue() == (monthIndex + 1); // back to 1–12
-                } catch (Exception e) {
-                    return false;
+            sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
+                public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
+                    try {
+                        String dateString = entry.getStringValue(2); // 3rd column = Date
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+                        LocalDate date = LocalDate.parse(dateString, formatter);
+                        return date.getMonthValue() == (monthIndex + 1); // back to 1–12
+                    } catch (Exception e) {
+                        return false;
+                    }
                 }
-            }
-        });
-    }
-}
+            });
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
