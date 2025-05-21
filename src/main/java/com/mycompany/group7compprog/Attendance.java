@@ -44,28 +44,28 @@ public class Attendance extends javax.swing.JPanel {
         } catch (IOException ex) {
             //JOptionPane.showMessageDialog(f2, "CSV file not found or couldn't load.");
         }
-        
+        //THIS GODDAMN THING STILL DOSENT WORK!
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
         String selected = (String) jComboBox1.getSelectedItem();
 
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-        jTable1.setRowSorter(sorter);  // IMPORTANT!
+        jTable1.setRowSorter(sorter);  // make sure it's applied
 
         if ("All".equals(selected)) {
-            sorter.setRowFilter(null);
+            sorter.setRowFilter(null); // show everything
         } else {
-            int monthIndex = jComboBox1.getSelectedIndex(); // Jan=1, Feb=2, etc.
+            int monthIndex = jComboBox1.getSelectedIndex() - 1; // Fix: subtract 1
 
             sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
                 public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
                     try {
-                        String dateString = entry.getStringValue(2); // 3rd column (Date)
+                        String dateString = entry.getStringValue(2); // 3rd column: Date
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
                         LocalDate date = LocalDate.parse(dateString, formatter);
-                        return date.getMonthValue() == monthIndex;
+                        return date.getMonthValue() == (monthIndex + 1); // back to 1–12
                     } catch (Exception e) {
-                        return false; // skip rows with bad date
+                        return false;
                     }
                 }
             });
@@ -92,7 +92,8 @@ public class Attendance extends javax.swing.JPanel {
 
             
             model.addRow(new Object[] {
-                empNo,                                  
+                empNo,
+                name,
                 date.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")), 
                timeIn.format(DateTimeFormatter.ofPattern("HH:mm:ss")), 
                ""                                     
