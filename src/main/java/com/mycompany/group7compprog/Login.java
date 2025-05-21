@@ -42,7 +42,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(255, 204, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -68,7 +68,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        jPanel4.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel4.setBackground(new java.awt.Color(255, 204, 255));
 
         LButton.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         LButton.setText("Log In");
