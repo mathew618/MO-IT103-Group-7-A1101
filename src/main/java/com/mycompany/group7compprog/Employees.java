@@ -23,7 +23,7 @@ public class Employees extends javax.swing.JPanel {
         DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number"}, 0);
         jTable1.setModel(model);
 
-        //*
+        //*/
         try (BufferedReader br = new BufferedReader(new FileReader("Employee.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
