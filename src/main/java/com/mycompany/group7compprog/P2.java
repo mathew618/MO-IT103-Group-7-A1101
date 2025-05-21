@@ -51,6 +51,7 @@ public class P2 extends javax.swing.JFrame {
         employees1 = new com.mycompany.group7compprog.Employees();
         attendance1 = new com.mycompany.group7compprog.Attendance();
         salary1 = new com.mycompany.group7compprog.Salary();
+        payslips1 = new com.mycompany.group7compprog.Payslips();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,6 +202,7 @@ public class P2 extends javax.swing.JFrame {
         Tabs.add(employees1, "f1");
         Tabs.add(attendance1, "f2");
         Tabs.add(salary1, "f3");
+        Tabs.add(payslips1, "f4");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -257,6 +259,7 @@ public class P2 extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        greg.show(Tabs, "f4");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void salBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salBtnActionPerformed
@@ -328,6 +331,7 @@ public class P2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private com.mycompany.group7compprog.Payslips payslips1;
     private javax.swing.JButton salBtn;
     private com.mycompany.group7compprog.Salary salary1;
     private javax.swing.JButton setBtn;
