@@ -32,7 +32,7 @@
                       <Component id="jPanel10" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace pref="125" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
