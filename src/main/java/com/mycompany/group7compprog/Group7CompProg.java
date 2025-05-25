@@ -89,9 +89,9 @@ class CheckEmp {
     private final ArrayList<Iforgor> banana = new ArrayList<>();
     
     public void check() {
-        String file = "yes.csv";
+        String file = "Employee.csv";
         String line;
-            
+        
         try (BufferedReader renx = new BufferedReader(new FileReader(file))) {
             banana.clear();
             
