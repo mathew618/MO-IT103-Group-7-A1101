@@ -32,10 +32,11 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         LButton = new javax.swing.JButton();
-        LPassword = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         LName = new javax.swing.JTextField();
+        showPw = new javax.swing.JCheckBox();
+        LPassword = new javax.swing.JPasswordField();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -78,12 +79,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        LPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LPasswordActionPerformed(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         jLabel3.setText("Password: ");
 
@@ -96,6 +91,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        showPw.setText("Show password");
+        showPw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPwActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -104,13 +106,13 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(LPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(LName, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(LName, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
+                            .addComponent(showPw, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LPassword)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addComponent(LButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -127,9 +129,11 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(12, 12, 12)
+                .addComponent(showPw)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101))
+                .addGap(89, 89, 89))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -165,10 +169,6 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_LNameActionPerformed
 
-    private void LPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LPasswordActionPerformed
-
     private void LButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LButtonActionPerformed
         // TODO add your handling code here:
         String name = LName.getText();
@@ -181,6 +181,15 @@ public class Login extends javax.swing.JFrame {
             System.out.println("Fail");
         }
     }//GEN-LAST:event_LButtonActionPerformed
+
+    private void showPwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPwActionPerformed
+        // TODO add your handling code here:
+        if (showPw.isSelected()) {
+            LPassword.setEchoChar((char)0);
+        } else {
+            LPassword.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showPwActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,7 +232,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LButton;
     private javax.swing.JTextField LName;
-    private javax.swing.JTextField LPassword;
+    private javax.swing.JPasswordField LPassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -231,5 +240,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JCheckBox showPw;
     // End of variables declaration//GEN-END:variables
 }

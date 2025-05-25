@@ -22,7 +22,7 @@ public class Salary extends javax.swing.JPanel {
      */
     public Salary() {
         initComponents();
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number"}, 0);
+        DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Last Name", "First Name", "Basic Salary", "Gross Semi-monthly Rate", "Hourly Rate"}, 0);
         jTable1.setModel(model);
 
         try (BufferedReader br = new BufferedReader(new FileReader("Employee.csv"))) {
