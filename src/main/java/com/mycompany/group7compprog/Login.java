@@ -4,17 +4,23 @@
  */
 package com.mycompany.group7compprog;
 
+import java.util.HashMap;
+
 /**
  *
  * @author HP
  */
 public class Login extends javax.swing.JFrame {
-
+    private static HashMap<String, String[]> user = new HashMap<>();
     /**
      * Creates new form Testing
      */
     public Login() {
         initComponents();
+        user.put("1",new String[]{"1","Admin"});
+        user.put("Fidel",new String[]{"Water","Admin"});
+        user.put("Mathew",new String[]{"Bread","Slave/Worker/Employee"});
+        user.put("Bees",new String[]{"Bee","Admin"});
     }
 
     /**
@@ -173,10 +179,18 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String name = LName.getText();
         String pw = LPassword.getText();
+
         
-        if (name.equals("1") && pw.equals("1")) {
-            new P2().setVisible(true);
+        if (user.containsKey(name) && user.get(name)[0].equals(pw)) {
+            P2 n = new P2();
+            n.setVisible(true);
+            if (name.equals("1")) {
+                n.uhh("Admin", user.get(name)[1]);
+            } else {
+                n.uhh(name, user.get(name)[1]);
+            }
             dispose();
+            
         } else {
             System.out.println("Fail");
         }

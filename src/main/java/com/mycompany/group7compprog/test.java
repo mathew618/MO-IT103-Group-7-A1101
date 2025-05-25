@@ -8,12 +8,12 @@ package com.mycompany.group7compprog;
  *
  * @author mathe
  */
-public class Payslips extends javax.swing.JPanel {
+public class test extends javax.swing.JPanel {
 
     /**
      * Creates new form Employees
      */
-    public Payslips() {
+    public test() {
         initComponents();
     }
 
@@ -26,8 +26,6 @@ public class Payslips extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jPanel16 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -66,8 +64,6 @@ public class Payslips extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField16 = new javax.swing.JTextField();
         jPanel12 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -87,12 +83,10 @@ public class Payslips extends javax.swing.JPanel {
         jPanel13 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jTextField15 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel15 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 204));
-
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        jPanel16.setBackground(new java.awt.Color(255, 255, 204));
 
         jPanel4.setBackground(new java.awt.Color(248, 247, 247));
 
@@ -515,42 +509,21 @@ public class Payslips extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MOTORPH PAYSLIP");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Names n Stuff" }));
-
-        jTextField16.setText("Filter Employee Name");
-        jTextField16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField16ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         jPanel12.setBackground(new java.awt.Color(184, 238, 238));
@@ -761,28 +734,39 @@ public class Payslips extends javax.swing.JPanel {
                         .addGap(10, 10, 10))))
         );
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(50, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 343, Short.MAX_VALUE)
         );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(jPanel15);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -792,105 +776,86 @@ public class Payslips extends javax.swing.JPanel {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
-        );
-
-        jScrollPane2.setViewportView(jPanel16);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
-
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
-
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
-
-    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField13ActionPerformed
-
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14ActionPerformed
-
-    private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField18ActionPerformed
-
-    private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField19ActionPerformed
-
-    private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField20ActionPerformed
 
     private void jTextField24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField24ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField24ActionPerformed
 
+    private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField20ActionPerformed
+
+    private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField19ActionPerformed
+
+    private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField18ActionPerformed
+
+    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField14ActionPerformed
+
+    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField13ActionPerformed
+
+    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12ActionPerformed
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField11ActionPerformed
+
+    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField10ActionPerformed
+
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField9ActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField5ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField15ActionPerformed
-
-    private void jTextField16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField16ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField16ActionPerformed
       
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -920,7 +885,7 @@ public class Payslips extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -930,7 +895,7 @@ public class Payslips extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
@@ -938,7 +903,6 @@ public class Payslips extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;

@@ -21,6 +21,10 @@ public class P2 extends javax.swing.JFrame {
         
         greg = (CardLayout)(Tabs.getLayout());
     }
+    public void uhh(String nema, String pos) {
+        fdName.setText(nema);
+        fdPos.setText(pos);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,8 +38,8 @@ public class P2 extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        fdName = new javax.swing.JLabel();
+        fdPos = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -64,9 +68,9 @@ public class P2 extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel2.setText("Position:");
 
-        jLabel3.setText("jLabel3");
+        fdName.setText("Name");
 
-        jLabel4.setText("jLabel4");
+        fdPos.setText("Position");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,14 +79,12 @@ public class P2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(fdPos, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addComponent(fdName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -91,11 +93,11 @@ public class P2 extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(fdName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(fdPos))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -320,11 +322,11 @@ public class P2 extends javax.swing.JFrame {
     private javax.swing.JButton empBtn;
     private com.mycompany.group7compprog.Employees employees1;
     private javax.swing.JButton exitBtn;
+    private javax.swing.JLabel fdName;
+    private javax.swing.JLabel fdPos;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
