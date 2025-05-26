@@ -5,6 +5,7 @@
 package com.mycompany.group7compprog;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,9 +18,9 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        user.put("1", new String[]{"1", "Admin"}); //<- For quick testing
+        user.put("1", new String[]{"1", "Test"}); //<- For quick testing
         user.put("Fidel David Sario", new String[]{"Youtubers!", "Admin"});
-        user.put("Mathew Wilson Vercida", new String[]{"Bread", "Slave/Worker/Employee"});
+        user.put("Mathew Wilson Vercida", new String[]{"Bread", "Employee"});
         user.put("Bianca Colleen Herrero", new String[]{"MotorPH1234", "Admin"});
         user.put("Elisha Chen Cang", new String[]{"MotorPH1234", "Admin"});
         user.put("Sandrine Sophia Baluyot", new String[]{"MotorPH1234", "Admin"});
@@ -192,9 +193,8 @@ public class Login extends javax.swing.JFrame {
                 n.uhh(name, user.get(name)[1]);
             }
             dispose();
-            
         } else {
-            System.out.println("Fail");
+            JOptionPane.showMessageDialog(null, "Incorrect Username/Password.");
         }
     }//GEN-LAST:event_LButtonActionPerformed
 
