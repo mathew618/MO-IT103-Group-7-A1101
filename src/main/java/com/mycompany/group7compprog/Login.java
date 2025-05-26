@@ -17,10 +17,12 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        user.put("1",new String[]{"1","Admin"});
-        user.put("Fidel",new String[]{"Water","Admin"});
-        user.put("Mathew",new String[]{"Bread","Slave/Worker/Employee"});
-        user.put("Bees",new String[]{"Bee","Admin"});
+        user.put("1",new String[]{"1", "Admin"});
+        user.put("Fidel David Sario",new String[]{"Youtubers!", "Admin"});
+        user.put("Mathew Wilson Vercida",new String[]{"Bread", "Slave/Worker/Employee"});
+        user.put("Bianca Colleen Herrero",new String[]{"MotorPH1234", "Admin"});
+        user.put("Elisha Chen Cang",new String[]{"MotorPH1234", "Admin"});
+        user.put("Sandrine Sophia Baluyot",new String[]{"MotorPH1234", "Admin"});
     }
 
     /**
@@ -114,9 +116,8 @@ public class Login extends javax.swing.JFrame {
                         .addGap(77, 77, 77)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(LName, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
+                            .addComponent(jLabel2)
+                            .addComponent(LName, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                             .addComponent(showPw, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(LPassword)))
                     .addGroup(jPanel4Layout.createSequentialGroup()

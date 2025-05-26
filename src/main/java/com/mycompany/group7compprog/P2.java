@@ -44,8 +44,8 @@ public class P2 extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         exitBtn = new javax.swing.JButton();
-        setBtn = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        paidBtn = new javax.swing.JButton();
+        payBtn = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         salBtn = new javax.swing.JButton();
         catBTn = new javax.swing.JButton();
@@ -56,6 +56,7 @@ public class P2 extends javax.swing.JFrame {
         attendance1 = new com.mycompany.group7compprog.Attendance();
         salary1 = new com.mycompany.group7compprog.Salary();
         payslips1 = new com.mycompany.group7compprog.Payslips();
+        paid1 = new com.mycompany.group7compprog.Paid();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,19 +116,19 @@ public class P2 extends javax.swing.JFrame {
             }
         });
 
-        setBtn.setFont(new java.awt.Font("Microsoft JhengHei", 1, 10)); // NOI18N
-        setBtn.setText("SETTINGS");
-        setBtn.addActionListener(new java.awt.event.ActionListener() {
+        paidBtn.setFont(new java.awt.Font("Microsoft JhengHei", 1, 10)); // NOI18N
+        paidBtn.setText("PAID");
+        paidBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setBtnActionPerformed(evt);
+                paidBtnActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Microsoft JhengHei", 1, 10)); // NOI18N
-        jButton4.setText("PAYSLIPS");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        payBtn.setFont(new java.awt.Font("Microsoft JhengHei", 1, 10)); // NOI18N
+        payBtn.setText("PAYSLIPS");
+        payBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                payBtnActionPerformed(evt);
             }
         });
 
@@ -169,12 +170,12 @@ public class P2 extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(salBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(payBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(catBTn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(empBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9)
-                    .addComponent(setBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paidBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -192,9 +193,9 @@ public class P2 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
+                .addComponent(payBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(setBtn)
+                .addComponent(paidBtn)
                 .addGap(9, 9, 9)
                 .addComponent(exitBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -205,6 +206,7 @@ public class P2 extends javax.swing.JFrame {
         Tabs.add(attendance1, "f2");
         Tabs.add(salary1, "f3");
         Tabs.add(payslips1, "f4");
+        Tabs.add(paid1, "f5");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -255,14 +257,15 @@ public class P2 extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_exitBtnActionPerformed
 
-    private void setBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setBtnActionPerformed
+    private void paidBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paidBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_setBtnActionPerformed
+         greg.show(Tabs, "f5");
+    }//GEN-LAST:event_paidBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void payBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payBtnActionPerformed
         // TODO add your handling code here:
         greg.show(Tabs, "f4");
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_payBtnActionPerformed
 
     private void salBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salBtnActionPerformed
         // TODO add your handling code here:
@@ -324,7 +327,6 @@ public class P2 extends javax.swing.JFrame {
     private javax.swing.JButton exitBtn;
     private javax.swing.JLabel fdName;
     private javax.swing.JLabel fdPos;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
@@ -333,9 +335,11 @@ public class P2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private com.mycompany.group7compprog.Paid paid1;
+    private javax.swing.JButton paidBtn;
+    private javax.swing.JButton payBtn;
     private com.mycompany.group7compprog.Payslips payslips1;
     private javax.swing.JButton salBtn;
     private com.mycompany.group7compprog.Salary salary1;
-    private javax.swing.JButton setBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,9 +4,6 @@
  */
 package com.mycompany.group7compprog;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -25,16 +22,10 @@ public class Employees extends javax.swing.JPanel {
         DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number"}, 0);
         jTable1.setModel(model);
 
-        //*/
-        try (BufferedReader br = new BufferedReader(new FileReader("Employee.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length >= 5) {
-                    model.addRow(data);
-                }
+        for (String[] data : Emp.get()) {
+            if (data.length >= 5) {
+                model.addRow(data);
             }
-        } catch (IOException ex) {
         }
         
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
@@ -62,17 +53,17 @@ public class Employees extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Employee Number", "Name", "Birthdate", "Address", "Phone Number"
+                "Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -86,12 +77,13 @@ public class Employees extends javax.swing.JPanel {
         f1Layout.setHorizontalGroup(
             f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(f1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(f1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(f1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(f1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         f1Layout.setVerticalGroup(
