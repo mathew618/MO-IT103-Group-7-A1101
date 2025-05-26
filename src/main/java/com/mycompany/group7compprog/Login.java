@@ -17,12 +17,13 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        user.put("1",new String[]{"1", "Admin"});
-        user.put("Fidel David Sario",new String[]{"Youtubers!", "Admin"});
-        user.put("Mathew Wilson Vercida",new String[]{"Bread", "Slave/Worker/Employee"});
-        user.put("Bianca Colleen Herrero",new String[]{"MotorPH1234", "Admin"});
-        user.put("Elisha Chen Cang",new String[]{"MotorPH1234", "Admin"});
-        user.put("Sandrine Sophia Baluyot",new String[]{"MotorPH1234", "Admin"});
+        user.put("1", new String[]{"1", "Admin"}); //<- For quick testing
+        user.put("Fidel David Sario", new String[]{"Youtubers!", "Admin"});
+        user.put("Mathew Wilson Vercida", new String[]{"Bread", "Slave/Worker/Employee"});
+        user.put("Bianca Colleen Herrero", new String[]{"MotorPH1234", "Admin"});
+        user.put("Elisha Chen Cang", new String[]{"MotorPH1234", "Admin"});
+        user.put("Sandrine Sophia Baluyot", new String[]{"MotorPH1234", "Admin"});
+        user.put("John Ray Herdani", new String[]{"MotorPH1234", "Admin"});
     }
 
     /**
