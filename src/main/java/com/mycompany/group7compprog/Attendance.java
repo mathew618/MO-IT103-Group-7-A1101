@@ -4,8 +4,7 @@
  */
 package com.mycompany.group7compprog;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
@@ -23,6 +21,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author mathe
  */
+
 public class Attendance extends javax.swing.JPanel {
 
     /**
@@ -32,6 +31,9 @@ public class Attendance extends javax.swing.JPanel {
         initComponents();
         DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Employee", "Date", "Time in", "Time Out"}, 0);
         jTable1.setModel(model);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
+        jTable1.setRowSorter(sorter);  // important!
 
         //*
         try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv"))) {
@@ -45,34 +47,6 @@ public class Attendance extends javax.swing.JPanel {
         } catch (IOException ex) {
             //JOptionPane.showMessageDialog(f2, "CSV file not found or couldn't load.");
         }
-        
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        String selected = (String) jComboBox1.getSelectedItem();
-
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-        jTable1.setRowSorter(sorter);  // make sure it's applied
-
-        if ("All".equals(selected)) {
-            sorter.setRowFilter(null); // show everything
-        } else {
-            int monthIndex = jComboBox1.getSelectedIndex() - 1; // Fix: subtract 1
-
-            sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
-                public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
-                    try {
-                        String dateString = entry.getStringValue(2); // 3rd column: Date
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
-                        LocalDate date = LocalDate.parse(dateString, formatter);
-                        return date.getMonthValue() == (monthIndex + 1); // back to 1–12
-                    } catch (Exception e) {
-                        return false;
-                    }
-                }
-            });
-        }
-    }
-});
 
         logIN.addActionListener(e -> {
             String name = jTextField2.getText().trim();
@@ -139,6 +113,7 @@ public class Attendance extends javax.swing.JPanel {
             }
         }
             JOptionPane.showMessageDialog(null, "No matching login record found for logout.");
+            
         });
     }
 
@@ -223,37 +198,38 @@ public class Attendance extends javax.swing.JPanel {
         f2.setLayout(f2Layout);
         f2Layout.setHorizontalGroup(
             f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, f2Layout.createSequentialGroup()
-                .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(f2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(f2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, f2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(f2Layout.createSequentialGroup()
-                                .addComponent(logIN)
-                                .addGap(45, 45, 45)
-                                .addComponent(logOut)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(f2Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(19, 19, 19))
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(f2Layout.createSequentialGroup()
+                        .addComponent(logIN)
+                        .addGap(45, 45, 45)
+                        .addComponent(logOut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))))
             .addGroup(f2Layout.createSequentialGroup()
                 .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(f2Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(f2Layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(f2Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 435, Short.MAX_VALUE))
                     .addGroup(f2Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         f2Layout.setVerticalGroup(
             f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,8 +250,8 @@ public class Attendance extends javax.swing.JPanel {
                     .addComponent(logOut)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -300,12 +276,29 @@ public class Attendance extends javax.swing.JPanel {
     }//GEN-LAST:event_logINActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] {
-    "All", "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-}));
-        
+        String selected = (String) jComboBox1.getSelectedItem();
+
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
+        jTable1.setRowSorter(sorter);  // important!
+
+        if ("All".equals(selected)) {
+            sorter.setRowFilter(null);
+        } else {
+            int monthIndex = jComboBox1.getSelectedIndex() - 1; // Subtract 1 for Jan = 0
+
+            sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
+                public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
+                    try {
+                        String dateString = entry.getStringValue(2); // 3rd column = Date
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+                        LocalDate date = LocalDate.parse(dateString, formatter);
+                        return date.getMonthValue() == (monthIndex + 1); // back to 1–12
+                    } catch (Exception e) {
+                        return false;
+                    }
+                }
+            });
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
 

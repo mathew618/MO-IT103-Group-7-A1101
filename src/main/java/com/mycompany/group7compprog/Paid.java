@@ -4,7 +4,6 @@
  */
 package com.mycompany.group7compprog;
 
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -12,25 +11,22 @@ import javax.swing.table.TableRowSorter;
  *
  * @author mathe
  */
-public class Salary extends javax.swing.JPanel {
+public class Paid extends javax.swing.JPanel {
 
     /**
      * Creates new form Employees
      */
-    public Salary() {
+    public Paid() {
         initComponents();
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Last Name", "First Name", "Basic Salary", "Gross Semi-monthly Rate", "Hourly Rate"}, 0);
-        jTable1.setModel(model);
-
-        for (String[] data : Emp.get()) {
-            if (data.length >= 5) {
-                String[] filter = {data[0], data[1], data[2], data[13], data[17], data[18]};
-                model.addRow(filter);
-            }
-        }
+        jTable1.setModel(Emp.getModel());
         
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
         jTable1.setRowSorter(sorter);
+    }
+    public void tomato(String Emp, String LName, String FName) {
+        System.out.println("Yes");
+        //model.addRow(new Object[] {Emp,LName,FName,"","",""});
+        
     }
 
     /**
@@ -42,15 +38,15 @@ public class Salary extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        f1 = new javax.swing.JPanel();
+        f5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        f1.setBackground(new java.awt.Color(255, 153, 153));
+        f5.setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
-        jLabel5.setText("• SALARY");
+        jLabel5.setText("• PAID");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -60,7 +56,7 @@ public class Salary extends javax.swing.JPanel {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Employee Number", "Last Name", "First Name", "Basic Salary", "Gross Semi-monthly Rate", "Hourly Rate"
+                "Employee Number", "Last Name", "First Name", "Earnings", "Deductions", "Total"
             }
         ) {
             Class[] types = new Class [] {
@@ -73,44 +69,44 @@ public class Salary extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        javax.swing.GroupLayout f1Layout = new javax.swing.GroupLayout(f1);
-        f1.setLayout(f1Layout);
-        f1Layout.setHorizontalGroup(
-            f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(f1Layout.createSequentialGroup()
+        javax.swing.GroupLayout f5Layout = new javax.swing.GroupLayout(f5);
+        f5.setLayout(f5Layout);
+        f5Layout.setHorizontalGroup(
+            f5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(f5Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(f1Layout.createSequentialGroup()
+                .addContainerGap(577, Short.MAX_VALUE))
+            .addGroup(f5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
-        f1Layout.setVerticalGroup(
-            f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(f1Layout.createSequentialGroup()
+        f5Layout.setVerticalGroup(
+            f5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(f5Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(f1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(f5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(f1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(f5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel f1;
+    private javax.swing.JPanel f5;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

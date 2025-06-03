@@ -16,20 +16,20 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="f1" alignment="0" max="32767" attributes="0"/>
+          <Component id="f5" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="f1" alignment="0" max="32767" attributes="0"/>
+          <Component id="f5" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="f1">
+    <Container class="javax.swing.JPanel" name="f5">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="99" red="ff" type="rgb"/>
+          <Color blue="99" green="cc" red="ff" type="rgb"/>
         </Property>
       </Properties>
 
@@ -39,11 +39,11 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="577" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="664" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -55,7 +55,7 @@
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="473" max="-2" attributes="0"/>
-                  <EmptySpace pref="43" max="32767" attributes="0"/>
+                  <EmptySpace pref="46" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -66,7 +66,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Bahnschrift" size="24" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x2022; SALARY"/>
+            <Property name="text" type="java.lang.String" value="&#x2022; PAID"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -83,9 +83,9 @@
                     <Column editable="true" title="Employee Number" type="java.lang.Integer"/>
                     <Column editable="true" title="Last Name" type="java.lang.String"/>
                     <Column editable="true" title="First Name" type="java.lang.String"/>
-                    <Column editable="true" title="Basic Salary" type="java.lang.String"/>
-                    <Column editable="true" title="Gross Semi-monthly Rate" type="java.lang.String"/>
-                    <Column editable="true" title="Hourly Rate" type="java.lang.String"/>
+                    <Column editable="true" title="Earnings" type="java.lang.String"/>
+                    <Column editable="true" title="Deductions" type="java.lang.String"/>
+                    <Column editable="true" title="Total" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
