@@ -5,6 +5,9 @@
 package com.mycompany.group7compprog;
 
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -13,23 +16,44 @@ import javax.swing.table.TableRowSorter;
  *
  * @author mathe
  */
-public class Employees extends javax.swing.JPanel {
-    
+public final class Employees extends javax.swing.JPanel {
+
     /**
      * Creates new form Employees
      */
     public Employees() {
         initComponents();
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number", "Status", "Position", "SSS", "Tin", "PhilHealth","Pag-ibig"}, 0);
-        jTable1.setModel(model);
+        jTable1.setModel(Emp.getEmpModel());
 
-        for (String[] data : Emp.get()) {
-            String[] filter = {data[0], data[1], data[2], data[3], data[4], data[5], data[10], data[11], data[6], data[8], data[7], data[9]};
-            model.addRow(filter);
-        }
-        
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
         jTable1.setRowSorter(sorter);
+
+        searchF.getDocument().addDocumentListener(new DocumentListener() {
+            private void filterTable() {
+                String searchText = searchF.getText().toLowerCase();
+
+                if (searchF.getText().equals("Search Employee Name")) {
+                    sorter.setRowFilter(null);
+                } else {
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + searchText));
+                }
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filterTable();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filterTable();
+            }
+        });
 
     }
 
@@ -49,6 +73,7 @@ public class Employees extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        searchF = new javax.swing.JTextField();
 
         f1.setBackground(new java.awt.Color(153, 153, 255));
 
@@ -97,6 +122,16 @@ public class Employees extends javax.swing.JPanel {
             }
         });
 
+        searchF.setText("Search Employee Name");
+        searchF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchFFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout f1Layout = new javax.swing.GroupLayout(f1);
         f1.setLayout(f1Layout);
         f1Layout.setHorizontalGroup(
@@ -108,15 +143,17 @@ public class Employees extends javax.swing.JPanel {
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(f1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(f1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton3)))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(15, 15, 15))
         );
         f1Layout.setVerticalGroup(
             f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,19 +164,18 @@ public class Employees extends javax.swing.JPanel {
                 .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addGap(61, 61, 61))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(f1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(f1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,30 +184,68 @@ public class Employees extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         int selectedRow = jTable1.getSelectedRow(); // get selected row from your JTable
+        int selectedRow = jTable1.getSelectedRow(); // get selected row from your JTable
 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please select an employee first.");
             return;
-    }
+        }
         int columnCount = jTable1.getColumnCount();
         Object[] empData = new Object[columnCount];
         for (int i = 0; i < columnCount; i++) {
             empData[i] = jTable1.getValueAt(selectedRow, i);
         }
 
-
         EmployeeDetails detailsFrame = new EmployeeDetails(empData);
         detailsFrame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private static AddEmployee n;
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if (n == null || !n.isDisplayable()) {
+            n = new AddEmployee(this);
+            n.setVisible(true);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        int selectedRow = jTable1.getSelectedRow(); // get selected row from your JTable
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select an employee to remove.");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to remove this employee?");
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        int modelRow = jTable1.convertRowIndexToModel(selectedRow);
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.removeRow(modelRow);
+
+        Emp.get().remove(modelRow);
+
+        JOptionPane.showMessageDialog(this, "Employee removed.");
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void searchFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFFocusGained
+        // TODO add your handling code here:
+        searchF.setText("");
+    }//GEN-LAST:event_searchFFocusGained
+
+    private void searchFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFFocusLost
+        // TODO add your handling code here:
+        if (searchF.getText().isEmpty()) {
+            searchF.setText("Search Employee Name");
+        }
+    }//GEN-LAST:event_searchFFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -182,5 +256,6 @@ public class Employees extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField searchF;
     // End of variables declaration//GEN-END:variables
 }

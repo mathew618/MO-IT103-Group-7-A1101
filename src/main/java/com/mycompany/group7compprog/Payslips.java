@@ -25,7 +25,7 @@ public class Payslips extends javax.swing.JPanel {
     public Payslips() {
         initComponents();
         wats.removeAllItems();
-        
+
         for (String[] data : Emp.get()) {
             if (data.length >= 5) {
                 wats.addItem(data[1] + ", " + data[2]);
@@ -35,7 +35,7 @@ public class Payslips extends javax.swing.JPanel {
             private void filterComboBox() {
                 String searchText = searchF.getText().toLowerCase();
                 wats.removeAllItems();
-                
+
                 if (searchF.getText().equals("Search Employee Name")) {
                     for (String[] data : Emp.get()) {
                         wats.addItem(data[1] + ", " + data[2]);
@@ -51,30 +51,38 @@ public class Payslips extends javax.swing.JPanel {
             }
 
             @Override
-            public void insertUpdate(DocumentEvent e) { filterComboBox(); }
+            public void insertUpdate(DocumentEvent e) {
+                filterComboBox();
+            }
+
             @Override
-            public void removeUpdate(DocumentEvent e) { filterComboBox(); }
+            public void removeUpdate(DocumentEvent e) {
+                filterComboBox();
+            }
+
             @Override
-            public void changedUpdate(DocumentEvent e) { filterComboBox(); }
+            public void changedUpdate(DocumentEvent e) {
+                filterComboBox();
+            }
         });
 
-        
         earning(rHwp, rHwp, rRate, rAmount);
         earning(rRate, rHwp, rRate, rAmount);
-        
+
         earning(oHwp, oHwp, oRate, oAmount);
         earning(oRate, oHwp, oRate, oAmount);
-        
+
         earning(bHwp, bHwp, bRate, bAmount);
         earning(bRate, bHwp, bRate, bAmount);
-        
+
         deduct(dTax);
         deduct(dSssc);
         deduct(dPhc);
-        
+
         focus(rPay, "Period");
         focus(rDate, "Date");
     }
+
     private void focus(JTextField text, String check) {
         text.addFocusListener(new FocusListener() {
             @Override
@@ -92,15 +100,24 @@ public class Payslips extends javax.swing.JPanel {
             }
         });
     }
-    
+
     private void earning(JTextField text, JTextField hourW, JTextField rateW, JTextField amountW) {
         text.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent e) { update(); }
+            public void insertUpdate(DocumentEvent e) {
+                update();
+            }
+
             @Override
-            public void removeUpdate(DocumentEvent e) { update(); }
+            public void removeUpdate(DocumentEvent e) {
+                update();
+            }
+
             @Override
-            public void changedUpdate(DocumentEvent e) { update(); }
+            public void changedUpdate(DocumentEvent e) {
+                update();
+            }
+
             private void update() {
                 try {
                     double hoursWorked = Double.parseDouble(hourW.getText());
@@ -109,10 +126,10 @@ public class Payslips extends javax.swing.JPanel {
 
                     DecimalFormat df = new DecimalFormat("#.##");
                     amountW.setText(df.format(amount));
-                    
+
                     double total = Double.parseDouble(rAmount.getText()) + Double.parseDouble(oAmount.getText()) + Double.parseDouble(bAmount.getText());
                     rTotal.setText(df.format(total));
-                    
+
                     double net = Double.parseDouble(rTotal.getText()) - Double.parseDouble(dTotal.getText());
                     Net.setText(df.format(net));
                 } catch (NumberFormatException ex) {
@@ -120,18 +137,27 @@ public class Payslips extends javax.swing.JPanel {
                 }
             }
         });
-        
+
         focus(text, "0");
     }
-    
+
     private void deduct(JTextField text) {
         text.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void insertUpdate(DocumentEvent e) { update(); }
+            public void insertUpdate(DocumentEvent e) {
+                update();
+            }
+
             @Override
-            public void removeUpdate(DocumentEvent e) { update(); }
+            public void removeUpdate(DocumentEvent e) {
+                update();
+            }
+
             @Override
-            public void changedUpdate(DocumentEvent e) { update(); }
+            public void changedUpdate(DocumentEvent e) {
+                update();
+            }
+
             private void update() {
                 try {
                     double Tax = Double.parseDouble(dTax.getText());
@@ -141,7 +167,7 @@ public class Payslips extends javax.swing.JPanel {
 
                     DecimalFormat df = new DecimalFormat("#.##");
                     dTotal.setText(df.format(total));
-                    
+
                     double net = Double.parseDouble(rTotal.getText()) - Double.parseDouble(dTotal.getText());
                     Net.setText(df.format(net));
                 } catch (NumberFormatException ex) {
@@ -149,7 +175,7 @@ public class Payslips extends javax.swing.JPanel {
                 }
             }
         });
-        
+
         focus(text, "0");
     }
 
@@ -1071,7 +1097,7 @@ public class Payslips extends javax.swing.JPanel {
                 oRate.setText("0");
                 bHwp.setText("0");
                 bRate.setText("0");
-                
+
                 dTax.setText("0");
                 dSssc.setText("0");
                 dPhc.setText("0");
@@ -1090,18 +1116,17 @@ public class Payslips extends javax.swing.JPanel {
             searchF.setText("Search Employee Name");
         }
     }//GEN-LAST:event_searchFFocusLost
-    
+
     private void nPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nPayActionPerformed
         // TODO add your handling code here:
         String selected = (String) wats.getSelectedItem();
         for (String[] data : Emp.get()) {
             if ((data[1] + ", " + data[2]).equals(selected)) {
-                Emp.setData(data[0], data[1], data[2],rDate.getText(),rTotal.getText(),dTotal.getText(),Net.getText());
+                Emp.setData(data[0], data[1], data[2], rDate.getText(), rTotal.getText(), dTotal.getText(), Net.getText());
                 //tomato(data[0], data[1], data[2]);
             }
         }
     }//GEN-LAST:event_nPayActionPerformed
-      
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

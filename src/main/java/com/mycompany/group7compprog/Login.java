@@ -12,7 +12,9 @@ import javax.swing.JOptionPane;
  * @author HP
  */
 public class Login extends javax.swing.JFrame {
+
     private static HashMap<String, String[]> user = new HashMap<>();
+
     /**
      * Creates new form Testing
      */
@@ -183,7 +185,6 @@ public class Login extends javax.swing.JFrame {
         String name = LName.getText();
         String pw = LPassword.getText();
 
-        
         if (user.containsKey(name) && user.get(name)[0].equals(pw)) {
             P2 n = new P2();
             n.setVisible(true);
@@ -201,7 +202,7 @@ public class Login extends javax.swing.JFrame {
     private void showPwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPwActionPerformed
         // TODO add your handling code here:
         if (showPw.isSelected()) {
-            LPassword.setEchoChar((char)0);
+            LPassword.setEchoChar((char) 0);
         } else {
             LPassword.setEchoChar('*');
         }
