@@ -24,6 +24,7 @@ public class Payslips extends javax.swing.JPanel {
      */
     public Payslips() {
         initComponents();
+        PsScroll.getVerticalScrollBar().setUnitIncrement(16);
         wats.removeAllItems();
 
         for (String[] data : Emp.get()) {
@@ -188,7 +189,7 @@ public class Payslips extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
+        PsScroll = new javax.swing.JScrollPane();
         jPanel16 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -253,7 +254,7 @@ public class Payslips extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 204));
 
-        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        PsScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -985,19 +986,17 @@ public class Payslips extends javax.swing.JPanel {
                 .addContainerGap(118, Short.MAX_VALUE))
         );
 
-        jScrollPane2.setViewportView(jPanel16);
+        PsScroll.setViewportView(jPanel16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+            .addComponent(PsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 26, Short.MAX_VALUE))
+            .addComponent(PsScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1131,6 +1130,7 @@ public class Payslips extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Net;
+    private javax.swing.JScrollPane PsScroll;
     private javax.swing.JTextField bAmount;
     private javax.swing.JTextField bHwp;
     private javax.swing.JTextField bRate;
@@ -1177,7 +1177,6 @@ public class Payslips extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton nPay;
     private javax.swing.JTextField oAmount;
     private javax.swing.JTextField oHwp;
