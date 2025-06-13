@@ -6,28 +6,37 @@ import javax.swing.table.DefaultTableModel;
 
 class Emp {
 
-    private static final List<String[]> banana = new ArrayList<>();
-    private static final DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Last Name", "First Name", "Date", "Earnings", "Deductions", "Total"}, 0);
-    private static final DefaultTableModel empModel = new DefaultTableModel(new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number", "Status", "Position", "SSS", "Tin", "PhilHealth", "Pag-ibig"}, 0);
+    // Employee data storage
+    private static final List<String[]> empData = new ArrayList<>();
 
+    // Table models for employee records and payslip
+    private static final DefaultTableModel payslipModel = new DefaultTableModel(
+        new Object[]{"Employee Number", "Last Name", "First Name", "Date", "Earnings", "Deductions", "Total"}, 0
+    );
+
+    private static final DefaultTableModel empModel = new DefaultTableModel(
+        new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number", 
+                     "Status", "Position", "SSS", "Tin", "PhilHealth", "Pag-ibig"}, 0
+    );
+
+    // Load employee data from CSV file
     public static void load() {
-        if (!banana.isEmpty()) return;
-        String file = "Employee.csv";
+        if (!empData.isEmpty()) return;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Employee.csv"))) {
             String line;
 
             while ((line = br.readLine()) != null) {
                 //System.out.println(line);
                 String[] data = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
                 if (data.length >= 5) {
-                    banana.add(data);
+                    empData.add(data);
                 }
             }
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + e.getMessage());
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            System.err.println("Error loading file: " + e.getMessage());
         }
     }
 
@@ -40,24 +49,26 @@ class Emp {
         }
     }
 
-    public static void addEmployee(String Emp, String LName, String FName, String Birthdate, String Address, String Phone, String Status, String Position, String SSS, String Tin, String PhilHealth, String Pagibig) {
-        empModel.addRow(new Object[]{Emp, LName, FName, Birthdate, Address, Phone, Status, Position, SSS, Tin, PhilHealth, Pagibig});
+    // Add new employee record
+    public static void addEmployee(String... employeeData) {
+        empModel.addRow(employeeData);
     }
 
+    // Retrieve employee data models
     public static DefaultTableModel getEmpModel() {
         return empModel;
     }
-
-    public static List<String[]> get() {
-        return banana;
-    }
-
+    
     public static DefaultTableModel getModel() {
-        return model;
+        return payslipModel;
+    }
+    
+    public static List<String[]> get() {
+        return empData; 
     }
 
     public static void setData(String Emp, String LName, String FName, String Date, String Earn, String Deduct, String Total) {
-        model.addRow(new Object[]{Emp, LName, FName, Date, Earn, Deduct, Total});
+        payslipModel.addRow(new Object[]{Emp, LName, FName, Date, Earn, Deduct, Total});
     }
 
 }

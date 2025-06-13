@@ -198,9 +198,9 @@ public class Login extends javax.swing.JFrame {
             n.setVisible(true);
             
             if (name.equals("1")) {
-                //n.uhh("Admin", user.get(name)[1]);
+                n.setUser("Admin", user.get(name)[1]);
             } else {
-                //n.uhh(name, user.get(name)[1]);
+                n.setUser(name, user.get(name)[1]);
             }
             dispose();
         } else {
