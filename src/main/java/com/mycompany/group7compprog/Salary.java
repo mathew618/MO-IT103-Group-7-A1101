@@ -4,7 +4,6 @@
  */
 package com.mycompany.group7compprog;
 
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -19,15 +18,7 @@ public class Salary extends javax.swing.JPanel {
      */
     public Salary() {
         initComponents();
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Last Name", "First Name", "Basic Salary", "Gross Semi-monthly Rate", "Hourly Rate"}, 0);
-        jTable1.setModel(model);
-
-        for (String[] data : Emp.get()) {
-            if (data.length >= 5) {
-                String[] filter = {data[0], data[1], data[2], data[13], data[17], data[18]};
-                model.addRow(filter);
-            }
-        }
+        jTable1.setModel(Emp.getSalaryModel());
         
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
         jTable1.setRowSorter(sorter);

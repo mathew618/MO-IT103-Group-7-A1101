@@ -4,6 +4,13 @@
  */
 package com.mycompany.group7compprog;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -229,10 +236,43 @@ public final class Employees extends javax.swing.JPanel {
         int modelRow = empTableL.convertRowIndexToModel(selectedRow);
 
         DefaultTableModel model = (DefaultTableModel) empTableL.getModel();
-        model.removeRow(modelRow);
+        
+        String empID = model.getValueAt(modelRow, 0).toString();
+        if (empID.equals("Employee #")) {
+            JOptionPane.showMessageDialog(this, "Please select an employee to remove.");
+            return;
+        }
+        
+        //Remove Employee CSV
+        String filePath = "temp_emp.csv";
+        List<String> lines = new ArrayList<>();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            int currentRow = 0;
 
-        Emp.get().remove(modelRow);
+            while ((line = reader.readLine()) != null) {
+                if (currentRow != modelRow) { // Skip the row being removed
+                    lines.add(line);
+                }
+                currentRow++;
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error reading file: " + e.getMessage());
+            return;
+        }
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error writing file: " + e.getMessage());
+        }
 
+        Emp.reloadEmp();
+        
         JOptionPane.showMessageDialog(this, "Employee removed.");
 
     }//GEN-LAST:event_removeEmpBtnActionPerformed

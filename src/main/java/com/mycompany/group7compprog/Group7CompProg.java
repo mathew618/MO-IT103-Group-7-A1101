@@ -5,7 +5,7 @@ import java.util.*;
 import javax.swing.table.DefaultTableModel;
 
 class Temp {
-    
+
     //Duplicate CSV
     public static void duplicateCSV(String sourceFile, String destinationFile) {
         File file = new File(destinationFile);
@@ -15,10 +15,9 @@ class Temp {
             //System.out.println("File already exists: " + destinationFile);
             return;
         }
-        
+
         //Duplicate the file
-        try (BufferedReader br = new BufferedReader(new FileReader(sourceFile));
-             BufferedWriter bw = new BufferedWriter(new FileWriter(destinationFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(sourceFile)); BufferedWriter bw = new BufferedWriter(new FileWriter(destinationFile))) {
 
             String line;
             while ((line = br.readLine()) != null) {
@@ -39,17 +38,23 @@ class Emp {
 
     // Table models for employee records and payslip
     private static final DefaultTableModel payslipModel = new DefaultTableModel(
-        new Object[]{"Employee Number", "Last Name", "First Name", "Date", "Earnings", "Deductions", "Total"}, 0
+            new Object[]{"Employee Number", "Last Name", "First Name", "Date", "Earnings", "Deductions", "Total"}, 0
     );
 
     private static final DefaultTableModel empModel = new DefaultTableModel(
-        new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number", 
-                     "Status", "Position", "SSS", "Tin", "PhilHealth", "Pag-ibig"}, 0
+            new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number",
+                "Status", "Position", "SSS", "Tin", "PhilHealth", "Pag-ibig"}, 0
+    );
+
+    private static final DefaultTableModel salaryModel = new DefaultTableModel(
+            new Object[]{"Employee Number", "Last Name", "First Name", "Basic Salary", "Gross Semi-monthly Rate", "Hourly Rate"}, 0
     );
 
     // Load employee data from CSV file
     public static void load() {
-        if (!empData.isEmpty()) return;
+        if (!empData.isEmpty()) {
+            return;
+        }
 
         try (BufferedReader br = new BufferedReader(new FileReader("temp_emp.csv"))) {
             String line;
@@ -67,15 +72,17 @@ class Emp {
             System.err.println("Error loading file: " + e.getMessage());
         }
     }
-    
+
     // Reload CSV and Model
     public static void reloadEmp() {
         empData.clear();
         empModel.setRowCount(0);
+        salaryModel.setRowCount(0);
         load();
         EmpTable();
+        SalaryTable();
     }
-    
+
     // Create employee list model
     public static void EmpTable() {
         for (String[] data : get()) {
@@ -85,13 +92,22 @@ class Emp {
             }
         }
     }
+    
+    public static void SalaryTable() {
+        for (String[] data : get()) {
+            if (data.length >= 5) {
+                String[] filter = {data[0], data[1], data[2], data[13], data[17], data[18]};
+                salaryModel.addRow(filter);
+            }
+        }
+    }
 
     // Add new employee record
     public static void addEmployee(String... employeeData) {
-    String filePath = "temp_emp.csv";
+        String filePath = "temp_emp.csv";
 
-    try (FileWriter writer = new FileWriter(filePath, true)) {
-        StringBuilder sb = new StringBuilder();
+        try (FileWriter writer = new FileWriter(filePath, true)) {
+            StringBuilder sb = new StringBuilder();
 
             for (int i = 0; i < employeeData.length; i++) {
                 sb.append(employeeData[i]);
@@ -114,14 +130,18 @@ class Emp {
         return empModel;
     }
     
+    public static DefaultTableModel getSalaryModel() {
+        return salaryModel;
+    }
+
     public static DefaultTableModel getModel() {
         return payslipModel;
     }
-    
+
     public static List<String[]> get() {
-        return empData; 
+        return empData;
     }
-    
+
     // Add paid employee list
     public static void setData(String Emp, String LName, String FName, String Date, String Earn, String Deduct, String Total) {
         payslipModel.addRow(new Object[]{Emp, LName, FName, Date, Earn, Deduct, Total});
