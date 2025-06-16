@@ -4,6 +4,9 @@
  */
 package com.mycompany.group7compprog;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
@@ -13,21 +16,30 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    private static HashMap<String, String[]> user = new HashMap<>();
+    private static final HashMap<String, String[]> user = new HashMap<>();
 
     /**
      * Creates new form Testing
      */
     public Login() {
         initComponents();
-        user.put("1", new String[]{"1", "Test"}); //<- For quick testing
-        user.put("Fidel David Sario", new String[]{"Youtubers!", "Admin"});
-        user.put("Mathew Wilson Vercida", new String[]{"Bread", "Employee"});
-        user.put("Bianca Colleen Herrero", new String[]{"MotorPH1234", "Admin"});
-        user.put("Elisha Chen Cang", new String[]{"MotorPH1234", "Admin"});
-        user.put("Sandrine Sophia Baluyot", new String[]{"MotorPH1234", "Admin"});
-        user.put("John Ray Herdani", new String[]{"MotorPH1234", "Admin"});
     }
+    
+    public static void loadUsers() {
+        user.clear();
+        try (BufferedReader br = new BufferedReader(new FileReader("login.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 3) {
+                    user.put(data[0], new String[]{data[1], data[2]});
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,7 +68,6 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        setPreferredSize(new java.awt.Dimension(620, 420));
         setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 255));
@@ -190,18 +201,18 @@ public class Login extends javax.swing.JFrame {
 
     private void LButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LButtonActionPerformed
         // TODO add your handling code here:
+        loadUsers();
+        
         String name = LName.getText();
         String pw = LPassword.getText();
-
-        if (user.containsKey(name) && user.get(name)[0].equals(pw)) {
+        
+        if (user.containsKey(name.trim()) && user.get(name.trim())[0].equals(pw.trim())) {
             P3 n = new P3();
             n.setVisible(true);
             
-            if (name.equals("1")) {
-                n.setUser("Admin", user.get(name)[1]);
-            } else {
-                n.setUser(name, user.get(name)[1]);
-            }
+            String position = user.get(name)[1];
+            n.setUser(name, position);
+            
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password.");

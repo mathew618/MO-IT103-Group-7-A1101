@@ -18,10 +18,10 @@ public class Paid extends javax.swing.JPanel {
      */
     public Paid() {
         initComponents();
-        jTable1.setModel(Emp.getModel());
+        paidTableL.setModel(Emp.getModel());
         
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-        jTable1.setRowSorter(sorter);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(paidTableL.getModel());
+        paidTableL.setRowSorter(sorter);
     }
     public void tomato(String Emp, String LName, String FName) {
         System.out.println("Yes");
@@ -41,14 +41,14 @@ public class Paid extends javax.swing.JPanel {
         f5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        paidTableL = new javax.swing.JTable();
 
         f5.setBackground(new java.awt.Color(255, 204, 153));
 
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         jLabel5.setText("• PAID");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        paidTableL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -67,7 +67,7 @@ public class Paid extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(paidTableL);
 
         javax.swing.GroupLayout f5Layout = new javax.swing.GroupLayout(f5);
         f5.setLayout(f5Layout);
@@ -109,6 +109,6 @@ public class Paid extends javax.swing.JPanel {
     private javax.swing.JPanel f5;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable paidTableL;
     // End of variables declaration//GEN-END:variables
 }

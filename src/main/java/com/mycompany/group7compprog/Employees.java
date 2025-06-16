@@ -23,11 +23,13 @@ public final class Employees extends javax.swing.JPanel {
      */
     public Employees() {
         initComponents();
-        jTable1.setModel(Emp.getEmpModel());
-
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-        jTable1.setRowSorter(sorter);
-
+        empTableL.setModel(Emp.getEmpModel());
+        
+        // Sorter
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(empTableL.getModel());
+        empTableL.setRowSorter(sorter);
+        
+        // Search Employee function
         searchF.getDocument().addDocumentListener(new DocumentListener() {
             private void filterTable() {
                 String searchText = searchF.getText().toLowerCase();
@@ -69,10 +71,10 @@ public final class Employees extends javax.swing.JPanel {
         f1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        empTableL = new javax.swing.JTable();
+        viewEmp = new javax.swing.JButton();
+        addEmpBtn = new javax.swing.JButton();
+        removeEmpBtn = new javax.swing.JButton();
         searchF = new javax.swing.JTextField();
 
         f1.setBackground(new java.awt.Color(153, 153, 255));
@@ -80,7 +82,7 @@ public final class Employees extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         jLabel5.setText("• EMPLOYEES");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        empTableL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -99,26 +101,26 @@ public final class Employees extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(empTableL);
 
-        jButton1.setText("View Employee");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        viewEmp.setText("View Employee");
+        viewEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                viewEmpActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Add Employee");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        addEmpBtn.setText("Add Employee");
+        addEmpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                addEmpBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Remove Employee");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        removeEmpBtn.setText("Remove Employee");
+        removeEmpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                removeEmpBtnActionPerformed(evt);
             }
         });
 
@@ -146,13 +148,13 @@ public final class Employees extends javax.swing.JPanel {
                         .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
                             .addGroup(f1Layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(viewEmp)
                                 .addGap(18, 18, 18)
                                 .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
-                                .addComponent(jButton2)
+                                .addComponent(addEmpBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3)))))
+                                .addComponent(removeEmpBtn)))))
                 .addGap(15, 15, 15))
         );
         f1Layout.setVerticalGroup(
@@ -162,9 +164,9 @@ public final class Employees extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(viewEmp)
+                    .addComponent(addEmpBtn)
+                    .addComponent(removeEmpBtn)
                     .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
@@ -183,36 +185,36 @@ public final class Employees extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int selectedRow = jTable1.getSelectedRow(); // get selected row from your JTable
+    private void viewEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEmpActionPerformed
+        int selectedRow = empTableL.getSelectedRow(); // get selected row from your JTable
 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please select an employee first.");
             return;
         }
-        int columnCount = jTable1.getColumnCount();
+        int columnCount = empTableL.getColumnCount();
         Object[] empData = new Object[columnCount];
         for (int i = 0; i < columnCount; i++) {
-            empData[i] = jTable1.getValueAt(selectedRow, i);
+            empData[i] = empTableL.getValueAt(selectedRow, i);
         }
 
         EmployeeDetails detailsFrame = new EmployeeDetails(empData);
         detailsFrame.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_viewEmpActionPerformed
 
     private static AddEmployee n;
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void addEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmpBtnActionPerformed
         // TODO add your handling code here:
         if (n == null || !n.isDisplayable()) {
             n = new AddEmployee(this);
             n.setVisible(true);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_addEmpBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void removeEmpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEmpBtnActionPerformed
         // TODO add your handling code here:
-        int selectedRow = jTable1.getSelectedRow(); // get selected row from your JTable
+        int selectedRow = empTableL.getSelectedRow(); // get selected row from your JTable
 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please select an employee to remove.");
@@ -224,16 +226,16 @@ public final class Employees extends javax.swing.JPanel {
             return;
         }
 
-        int modelRow = jTable1.convertRowIndexToModel(selectedRow);
+        int modelRow = empTableL.convertRowIndexToModel(selectedRow);
 
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) empTableL.getModel();
         model.removeRow(modelRow);
 
         Emp.get().remove(modelRow);
 
         JOptionPane.showMessageDialog(this, "Employee removed.");
 
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_removeEmpBtnActionPerformed
 
     private void searchFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFFocusGained
         // TODO add your handling code here:
@@ -249,13 +251,13 @@ public final class Employees extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addEmpBtn;
+    private javax.swing.JTable empTableL;
     private javax.swing.JPanel f1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton removeEmpBtn;
     private javax.swing.JTextField searchF;
+    private javax.swing.JButton viewEmp;
     // End of variables declaration//GEN-END:variables
 }

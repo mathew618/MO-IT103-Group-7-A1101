@@ -1096,10 +1096,22 @@ public class Payslips extends javax.swing.JPanel {
                 oRate.setText("0");
                 bHwp.setText("0");
                 bRate.setText("0");
-
-                dTax.setText("0");
-                dSssc.setText("0");
-                dPhc.setText("0");
+                
+                dTax.setText(data[22]);
+                
+                if (dTax.getText().trim().equals("Witholding Tax ded")) {
+                    dTax.setText("0");
+                    dSssc.setText("0");
+                    dPhc.setText("0");
+                } else {
+                    try {
+                        dTax.setText(String.valueOf(Double.parseDouble(dTax.getText()) / 30));
+                        dSssc.setText(String.valueOf(Double.parseDouble(data[19]) / 30));
+                        dPhc.setText(String.valueOf(Double.parseDouble(data[21]) / 30));
+                    } catch (NumberFormatException e) {
+                        System.err.println("Error converting deduction: " + e.getMessage());
+                    }
+                }
             }
         }
     }//GEN-LAST:event_watsActionPerformed

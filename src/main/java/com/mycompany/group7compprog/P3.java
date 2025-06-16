@@ -52,6 +52,7 @@ public class P3 extends javax.swing.JFrame {
         catBTn = new javax.swing.JButton();
         empBtn = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        settingsBtn = new javax.swing.JButton();
         Scroll = new javax.swing.JScrollPane();
         Tabs = new javax.swing.JPanel();
         employees1 = new com.mycompany.group7compprog.Employees();
@@ -59,6 +60,7 @@ public class P3 extends javax.swing.JFrame {
         salary1 = new com.mycompany.group7compprog.Salary();
         payslips1 = new com.mycompany.group7compprog.Payslips();
         paid1 = new com.mycompany.group7compprog.Paid();
+        settings1 = new com.mycompany.group7compprog.Settings();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -168,6 +170,14 @@ public class P3 extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setText("MENU");
 
+        settingsBtn.setFont(new java.awt.Font("Microsoft JhengHei", 1, 10)); // NOI18N
+        settingsBtn.setText("SETTINGS");
+        settingsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -182,7 +192,8 @@ public class P3 extends javax.swing.JFrame {
                     .addComponent(empBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9)
                     .addComponent(paidBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(settingsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -202,9 +213,11 @@ public class P3 extends javax.swing.JFrame {
                 .addComponent(payBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(paidBtn)
-                .addGap(9, 9, 9)
+                .addGap(12, 12, 12)
+                .addComponent(settingsBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(exitBtn)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         Scroll.setBorder(null);
@@ -217,6 +230,7 @@ public class P3 extends javax.swing.JFrame {
         Tabs.add(salary1, "f3");
         Tabs.add(payslips1, "f4");
         Tabs.add(paid1, "f5");
+        Tabs.add(settings1, "f6");
 
         Scroll.setViewportView(Tabs);
 
@@ -290,6 +304,11 @@ public class P3 extends javax.swing.JFrame {
         greg.show(Tabs, "f1");
     }//GEN-LAST:event_empBtnActionPerformed
 
+    private void settingsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsBtnActionPerformed
+        // TODO add your handling code here:
+        greg.show(Tabs, "f6");
+    }//GEN-LAST:event_settingsBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -348,5 +367,7 @@ public class P3 extends javax.swing.JFrame {
     private com.mycompany.group7compprog.Payslips payslips1;
     private javax.swing.JButton salBtn;
     private com.mycompany.group7compprog.Salary salary1;
+    private com.mycompany.group7compprog.Settings settings1;
+    private javax.swing.JButton settingsBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -45,12 +45,12 @@ public class Attendance extends javax.swing.JPanel {
                 }
             }
         } catch (IOException ex) {
-            //JOptionPane.showMessageDialog(f2, "CSV file not found or couldn't load.");
+            System.err.println("Error file: " + ex.getMessage());
         }
 
         logIN.addActionListener(e -> {
-            String name = jTextField2.getText().trim();
-            String empNo = jTextField1.getText().trim();
+            String name = empNameA.getText().trim();
+            String empNo = empNumA.getText().trim();
             if (name.isEmpty() && empNo.isEmpty()) {
                JOptionPane.showMessageDialog(null, "Please enter employee name and employee number.");
                 return;
@@ -74,13 +74,13 @@ public class Attendance extends javax.swing.JPanel {
                ""                                     
             });
 
-            jTextField1.setText(""); // Clear employee number field
-            jTextField2.setText(""); // Clear name field
+            empNumA.setText(""); // Clear employee number field
+            empNameA.setText(""); // Clear name field
             });
 
         logOut.addActionListener(e -> {
-            String name = jTextField2.getText().trim();
-            String empNo = jTextField1.getText().trim();
+            String name = empNameA.getText().trim();
+            String empNo = empNumA.getText().trim();
             if (name.isEmpty() && empNo.isEmpty()) {
                JOptionPane.showMessageDialog(null, "Please enter employee name and employee number.");
                 return;
@@ -107,8 +107,8 @@ public class Attendance extends javax.swing.JPanel {
 
             model.setValueAt(timeOut.format(DateTimeFormatter.ofPattern("HH:mm:ss")), i, 4);
                 JOptionPane.showMessageDialog(null, "Logged out successfully!");
-                jTextField2.setText("");
-                jTextField1.setText("");
+                empNameA.setText("");
+                empNumA.setText("");
                 return;
             }
         }
@@ -128,14 +128,14 @@ public class Attendance extends javax.swing.JPanel {
 
         f2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        empNameA = new javax.swing.JTextField();
         logIN = new javax.swing.JButton();
         logOut = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        empNumA = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         f2.setBackground(new java.awt.Color(255, 204, 255));
@@ -144,10 +144,10 @@ public class Attendance extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         jLabel4.setText("• ATTENDANCE");
 
-        jTextField2.setBackground(new java.awt.Color(221, 238, 255));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        empNameA.setBackground(new java.awt.Color(221, 238, 255));
+        empNameA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                empNameAActionPerformed(evt);
             }
         });
 
@@ -190,7 +190,7 @@ public class Attendance extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.setToolTipText("");
+        empNumA.setToolTipText("");
 
         jLabel2.setText("Enter Employee Number:");
 
@@ -202,11 +202,11 @@ public class Attendance extends javax.swing.JPanel {
                 .addGap(12, 12, 12)
                 .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(f2Layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(empNameA, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(empNumA, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(f2Layout.createSequentialGroup()
                         .addComponent(logIN)
@@ -242,8 +242,8 @@ public class Attendance extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(4, 4, 4)
                 .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(empNameA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(empNumA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(f2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logIN)
@@ -267,9 +267,9 @@ public class Attendance extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void empNameAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empNameAActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_empNameAActionPerformed
 
     private void logINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logINActionPerformed
         // TODO add your handling code here:
@@ -303,6 +303,8 @@ public class Attendance extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField empNameA;
+    private javax.swing.JTextField empNumA;
     private javax.swing.JPanel f2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -310,8 +312,6 @@ public class Attendance extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton logIN;
     private javax.swing.JButton logOut;
     // End of variables declaration//GEN-END:variables
