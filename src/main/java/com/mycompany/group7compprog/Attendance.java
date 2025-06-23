@@ -138,7 +138,7 @@ public class Attendance extends javax.swing.JPanel {
         empNumA = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
-        f2.setBackground(new java.awt.Color(255, 204, 255));
+        f2.setBackground(new java.awt.Color(228, 255, 255));
 
         jLabel4.setBackground(new java.awt.Color(204, 102, 0));
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
@@ -225,7 +225,7 @@ public class Attendance extends javax.swing.JPanel {
                             .addGroup(f2Layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 435, Short.MAX_VALUE))
+                        .addGap(0, 381, Short.MAX_VALUE))
                     .addGroup(f2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1)))
@@ -250,8 +250,8 @@ public class Attendance extends javax.swing.JPanel {
                     .addComponent(logOut)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

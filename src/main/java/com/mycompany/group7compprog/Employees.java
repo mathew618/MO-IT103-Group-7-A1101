@@ -84,7 +84,7 @@ public final class Employees extends javax.swing.JPanel {
         removeEmpBtn = new javax.swing.JButton();
         searchF = new javax.swing.JTextField();
 
-        f1.setBackground(new java.awt.Color(153, 153, 255));
+        f1.setBackground(new java.awt.Color(228, 255, 255));
 
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         jLabel5.setText("• EMPLOYEES");
@@ -110,6 +110,7 @@ public final class Employees extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(empTableL);
 
+        viewEmp.setBackground(new java.awt.Color(255, 255, 204));
         viewEmp.setText("View Employee");
         viewEmp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,6 +118,7 @@ public final class Employees extends javax.swing.JPanel {
             }
         });
 
+        addEmpBtn.setBackground(new java.awt.Color(189, 222, 255));
         addEmpBtn.setText("Add Employee");
         addEmpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +126,7 @@ public final class Employees extends javax.swing.JPanel {
             }
         });
 
+        removeEmpBtn.setBackground(new java.awt.Color(255, 204, 204));
         removeEmpBtn.setText("Remove Employee");
         removeEmpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,10 +157,10 @@ public final class Employees extends javax.swing.JPanel {
                         .addGap(15, 15, 15)
                         .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
-                            .addGroup(f1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, f1Layout.createSequentialGroup()
                                 .addComponent(viewEmp)
                                 .addGap(18, 18, 18)
-                                .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(searchF, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                                 .addGap(30, 30, 30)
                                 .addComponent(addEmpBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -174,10 +177,10 @@ public final class Employees extends javax.swing.JPanel {
                     .addComponent(viewEmp)
                     .addComponent(addEmpBtn)
                     .addComponent(removeEmpBtn)
-                    .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchF))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
-                .addGap(61, 61, 61))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
