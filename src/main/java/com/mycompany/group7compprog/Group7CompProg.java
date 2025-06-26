@@ -154,7 +154,7 @@ public class Group7CompProg {
     public static void main(String[] args) {
         Temp.duplicateCSV("Employee.csv", "temp_emp.csv");
         Emp.reloadEmp();
-        new Login().setVisible(true);
-
+        //new Login().setVisible(true);
+        new P3().setVisible(true);
     }
 }
