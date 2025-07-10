@@ -42,8 +42,8 @@ class Emp {
     );
 
     private static final DefaultTableModel empModel = new DefaultTableModel(
-            new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number",
-                "Status", "Position", "SSS", "Tin", "PhilHealth", "Pag-ibig"}, 0
+            //new Object[]{"Employee Number", "Last Name", "First Name", "Birthdate", "Address", "Phone Number", "Status", "Position", "SSS", "Tin", "PhilHealth", "Pag-ibig"}, 0
+            new Object[]{"Employee Number", "Last Name", "First Name", "Position"}, 0
     );
 
     private static final DefaultTableModel salaryModel = new DefaultTableModel(
@@ -88,6 +88,7 @@ class Emp {
         for (String[] data : get()) {
             if (data.length >= 12) {
                 String[] filter = {data[0], data[1], data[2], data[3], data[4], data[5], data[10], data[11], data[6], data[8], data[7], data[9]};
+                //String[] filter = {data[0], data[1], data[2], data[11]};
                 empModel.addRow(filter);
             }
         }
@@ -154,7 +155,6 @@ public class Group7CompProg {
     public static void main(String[] args) {
         Temp.duplicateCSV("Employee.csv", "temp_emp.csv");
         Emp.reloadEmp();
-        //new Login().setVisible(true);
-        new P3().setVisible(true);
+        new Login().setVisible(true);
     }
 }

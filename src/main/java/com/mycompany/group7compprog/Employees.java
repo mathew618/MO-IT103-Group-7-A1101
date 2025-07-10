@@ -75,7 +75,7 @@ public final class Employees extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        f1 = new javax.swing.JPanel();
+        gradientPanel1 = new com.mycompany.group7compprog.GradientPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         empTableL = new javax.swing.JTable();
@@ -84,7 +84,8 @@ public final class Employees extends javax.swing.JPanel {
         removeEmpBtn = new javax.swing.JButton();
         searchF = new javax.swing.JTextField();
 
-        f1.setBackground(new java.awt.Color(228, 255, 255));
+        gradientPanel1.setColor1(new java.awt.Color(228, 255, 255));
+        gradientPanel1.setColor2(new java.awt.Color(102, 204, 255));
 
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         jLabel5.setText("• EMPLOYEES");
@@ -144,20 +145,20 @@ public final class Employees extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout f1Layout = new javax.swing.GroupLayout(f1);
-        f1.setLayout(f1Layout);
-        f1Layout.setHorizontalGroup(
-            f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(f1Layout.createSequentialGroup()
-                .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(f1Layout.createSequentialGroup()
+        javax.swing.GroupLayout gradientPanel1Layout = new javax.swing.GroupLayout(gradientPanel1);
+        gradientPanel1.setLayout(gradientPanel1Layout);
+        gradientPanel1Layout.setHorizontalGroup(
+            gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gradientPanel1Layout.createSequentialGroup()
+                .addGroup(gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(gradientPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(f1Layout.createSequentialGroup()
+                    .addGroup(gradientPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, f1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, gradientPanel1Layout.createSequentialGroup()
                                 .addComponent(viewEmp)
                                 .addGap(18, 18, 18)
                                 .addComponent(searchF, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
@@ -167,15 +168,15 @@ public final class Employees extends javax.swing.JPanel {
                                 .addComponent(removeEmpBtn)))))
                 .addGap(15, 15, 15))
         );
-        f1Layout.setVerticalGroup(
-            f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(f1Layout.createSequentialGroup()
+        gradientPanel1Layout.setVerticalGroup(
+            gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(gradientPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchF, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(f1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(viewEmp)
                         .addComponent(addEmpBtn)
                         .addComponent(removeEmpBtn)))
@@ -188,11 +189,15 @@ public final class Employees extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(f1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 622, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(gradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(f1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 419, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(gradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -203,11 +208,18 @@ public final class Employees extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select an employee first.");
             return;
         }
+        /*
         int columnCount = empTableL.getColumnCount();
         Object[] empData = new Object[columnCount];
         for (int i = 0; i < columnCount; i++) {
             empData[i] = empTableL.getValueAt(selectedRow, i);
-        }
+        }*/
+        
+        int modelRow = empTableL.convertRowIndexToModel(selectedRow);
+        
+        String[] data = Emp.get().get(modelRow);
+        
+        String[] empData = {data[0], data[1], data[2], data[3], data[4], data[5], data[10], data[11], data[6], data[8], data[7], data[9]};
 
         EmployeeDetails detailsFrame = new EmployeeDetails(empData);
         detailsFrame.setVisible(true);
@@ -297,7 +309,7 @@ public final class Employees extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addEmpBtn;
     private javax.swing.JTable empTableL;
-    private javax.swing.JPanel f1;
+    private com.mycompany.group7compprog.GradientPanel gradientPanel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeEmpBtn;
