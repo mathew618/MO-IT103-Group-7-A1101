@@ -38,7 +38,8 @@ public class Settings extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
         jLabel5.setText("• SETTINGS");
 
-        jButton1.setBackground(new java.awt.Color(255, 204, 204));
+        jButton1.setBackground(new java.awt.Color(255, 255, 204));
+        jButton1.setFont(new java.awt.Font("Microsoft JhengHei", 1, 10)); // NOI18N
         jButton1.setText("Reset CSV");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,9 +63,9 @@ public class Settings extends javax.swing.JPanel {
             .addGroup(gradientPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel5)
-                .addGap(56, 56, 56)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -18,8 +18,11 @@ public class Paid extends javax.swing.JPanel {
      */
     public Paid() {
         initComponents();
+        
+        // Set the data model of the paid table from employees
         paidTableL.setModel(Emp.getModel());
         
+        // Table sorting by column
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(paidTableL.getModel());
         paidTableL.setRowSorter(sorter);
     }

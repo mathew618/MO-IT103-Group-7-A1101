@@ -224,14 +224,15 @@ public class Login extends javax.swing.JFrame {
         String pw = LPassword.getText();
         
         if (user.containsKey(name.trim()) && user.get(name.trim())[0].equals(pw.trim())) {
-            P3 n = new P3();
+            Main n = new Main();
             n.setVisible(true);
             
             String position = user.get(name)[1];
             n.setUser(name, position);
             
-            dispose();
+            dispose(); // close login frame
         } else {
+            // Invalid credentials
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password.");
         }
     }//GEN-LAST:event_LButtonActionPerformed

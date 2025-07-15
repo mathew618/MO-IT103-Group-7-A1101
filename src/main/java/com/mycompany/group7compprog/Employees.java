@@ -32,7 +32,7 @@ public final class Employees extends javax.swing.JPanel {
         initComponents();
         empTableL.setModel(Emp.getEmpModel());
         
-        // Sorter
+        // Enable sorting
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(empTableL.getModel());
         empTableL.setRowSorter(sorter);
         
@@ -287,8 +287,8 @@ public final class Employees extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error writing file: " + e.getMessage());
         }
 
+        // Reload data from updated CSV
         Emp.reloadEmp();
-        
         JOptionPane.showMessageDialog(this, "Employee removed.");
 
     }//GEN-LAST:event_removeEmpBtnActionPerformed

@@ -74,10 +74,12 @@ public class Attendance extends javax.swing.JPanel {
                ""                                     
             });
 
+            // Clear button action: clears both employee number and name fields 
             empNumA.setText(""); // Clear employee number field
             empNameA.setText(""); // Clear name field
             });
 
+        // Log Out button action
         logOut.addActionListener(e -> {
             String name = empNameA.getText().trim();
             String empNo = empNumA.getText().trim();
@@ -91,6 +93,8 @@ public class Attendance extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Please enter employee number.");
                 return;
             }
+            
+            // Get current date and time for logging out
             LocalDate today = LocalDate.now();
             LocalTime timeOut = LocalTime.now();
 
@@ -112,6 +116,7 @@ public class Attendance extends javax.swing.JPanel {
                 return;
             }
         }
+            // If no matching record is found
             JOptionPane.showMessageDialog(null, "No matching login record found for logout.");
             
         });
