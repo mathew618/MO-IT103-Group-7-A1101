@@ -2,6 +2,7 @@ package com.mycompany.group7compprog;
 
 import java.io.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 class Temp {
@@ -148,6 +149,41 @@ class Emp {
         payslipModel.addRow(new Object[]{Emp, LName, FName, Date, Earn, Deduct, Total});
     }
 
+}
+
+class Attend {
+    
+    // Load attendance data from CSV file
+    public static void load(DefaultTableModel model) {
+        try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 5) {
+                    model.addRow(data);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error loading file: " + e.getMessage());
+        }
+    }
+    
+    //Check if the fields are not empty
+    public static boolean checkInput(String name, String empNo) {
+        if (name.isEmpty() && empNo.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter employee name and employee number.");
+            return false;
+        } else if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter employee name.");
+            return false;
+        } else if (empNo.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter employee number.");
+            return false;
+        }
+        return true;
+    }
 }
 
 public class Group7CompProg {

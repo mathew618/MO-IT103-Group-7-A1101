@@ -4,10 +4,6 @@
  */
 package com.mycompany.group7compprog;
 
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,105 +17,25 @@ import javax.swing.table.TableRowSorter;
  *
  * @author mathe
  */
-
 public class Attendance extends javax.swing.JPanel {
 
     /**
      * Creates new form Attendance
      */
+    private final TableRowSorter<TableModel> sorter;
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static DefaultTableModel model;
+
     public Attendance() {
         initComponents();
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"Employee Number", "Employee", "Date", "Time in", "Time Out"}, 0);
+        model = new DefaultTableModel(new Object[]{"Employee Number", "Employee", "Date", "Time in", "Time Out"}, 0);
         jTable1.setModel(model);
-        
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
+
+        sorter = new TableRowSorter<>(jTable1.getModel());
         jTable1.setRowSorter(sorter);  // important!
 
-        //*
-        try (BufferedReader br = new BufferedReader(new FileReader("AttendanceData.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                if (data.length == 5) {
-                    model.addRow(data);
-                }
-            }
-        } catch (IOException ex) {
-            System.err.println("Error file: " + ex.getMessage());
-        }
-
-        logIN.addActionListener(e -> {
-            String name = empNameA.getText().trim();
-            String empNo = empNumA.getText().trim();
-            if (name.isEmpty() && empNo.isEmpty()) {
-               JOptionPane.showMessageDialog(null, "Please enter employee name and employee number.");
-                return;
-            } else if (name.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter employee name.");
-                return;
-            } else if (empNo.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter employee number.");
-                return;
-            }
-            
-            LocalDate date = LocalDate.now();
-            LocalTime timeIn = LocalTime.now();
-
-            
-            model.addRow(new Object[] {
-                empNo,
-                name,
-                date.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")), 
-               timeIn.format(DateTimeFormatter.ofPattern("HH:mm:ss")), 
-               ""                                     
-            });
-
-            // Clear button action: clears both employee number and name fields 
-            empNumA.setText(""); // Clear employee number field
-            empNameA.setText(""); // Clear name field
-            });
-
-        // Log Out button action
-        logOut.addActionListener(e -> {
-            String name = empNameA.getText().trim();
-            String empNo = empNumA.getText().trim();
-            if (name.isEmpty() && empNo.isEmpty()) {
-               JOptionPane.showMessageDialog(null, "Please enter employee name and employee number.");
-                return;
-            } else if (name.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter employee name.");
-                return;
-            } else if (empNo.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please enter employee number.");
-                return;
-            }
-            
-            // Get current date and time for logging out
-            LocalDate today = LocalDate.now();
-            LocalTime timeOut = LocalTime.now();
-
-            for (int i = 0; i < model.getRowCount(); i++) {
-                String rowEmpNo = model.getValueAt(i, 0).toString();
-                String rowName = model.getValueAt(i, 1).toString();
-                String rowDate = model.getValueAt(i, 2).toString();
-                String rowTimeOut = model.getValueAt(i, 4).toString();
-
-            if (rowDate.equals(today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")))
-                && rowName.equals(name)
-                && rowEmpNo.equals(empNo)
-                && rowTimeOut.isEmpty()) {
-
-            model.setValueAt(timeOut.format(DateTimeFormatter.ofPattern("HH:mm:ss")), i, 4);
-                JOptionPane.showMessageDialog(null, "Logged out successfully!");
-                empNameA.setText("");
-                empNumA.setText("");
-                return;
-            }
-        }
-            // If no matching record is found
-            JOptionPane.showMessageDialog(null, "No matching login record found for logout.");
-            
-        });
+        Attend.load(model);
     }
 
     /**
@@ -139,7 +55,7 @@ public class Attendance extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        MonthPicker = new javax.swing.JComboBox<>();
         empNumA = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
@@ -165,6 +81,11 @@ public class Attendance extends javax.swing.JPanel {
         });
 
         logOut.setText("Log-Out");
+        logOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -189,10 +110,10 @@ public class Attendance extends javax.swing.JPanel {
 
         jLabel1.setText("Enter Employee Name:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        MonthPicker.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+        MonthPicker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                MonthPickerActionPerformed(evt);
             }
         });
 
@@ -219,7 +140,7 @@ public class Attendance extends javax.swing.JPanel {
                         .addGap(45, 45, 45)
                         .addComponent(logOut)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(MonthPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8))))
             .addGroup(gradientPanel1Layout.createSequentialGroup()
                 .addGroup(gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,7 +175,7 @@ public class Attendance extends javax.swing.JPanel {
                 .addGroup(gradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logIN)
                     .addComponent(logOut)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MonthPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
                 .addGap(50, 50, 50))
@@ -289,25 +210,43 @@ public class Attendance extends javax.swing.JPanel {
 
     private void logINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logINActionPerformed
         // TODO add your handling code here:
+        String name = empNameA.getText().trim();
+        String empNo = empNumA.getText().trim();
+
+        if (!Attend.checkInput(name, empNo)) {
+            return;
+        }
+
+        LocalDate date = LocalDate.now();
+        LocalTime timeIn = LocalTime.now();
+
+        model.addRow(new Object[]{
+            empNo,
+            name,
+            date.format(DATE_FORMAT),
+            timeIn.format(TIME_FORMAT),
+            ""
+        });
+
+        // Clear button action: clears both employee number and name fields 
+        empNumA.setText(""); // Clear employee number field
+        empNameA.setText(""); // Clear name field
     }//GEN-LAST:event_logINActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        String selected = (String) jComboBox1.getSelectedItem();
-
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTable1.getModel());
-        jTable1.setRowSorter(sorter);  // important!
+    private void MonthPickerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MonthPickerActionPerformed
+        String selected = (String) MonthPicker.getSelectedItem();
 
         if ("All".equals(selected)) {
             sorter.setRowFilter(null);
         } else {
-            int monthIndex = jComboBox1.getSelectedIndex() - 1; // Subtract 1 for Jan = 0
+            int monthIndex = MonthPicker.getSelectedIndex() - 1; // Subtract 1 for Jan = 0
 
             sorter.setRowFilter(new RowFilter<TableModel, Integer>() {
+                @Override
                 public boolean include(RowFilter.Entry<? extends TableModel, ? extends Integer> entry) {
                     try {
                         String dateString = entry.getStringValue(2); // 3rd column = Date
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
-                        LocalDate date = LocalDate.parse(dateString, formatter);
+                        LocalDate date = LocalDate.parse(dateString, DATE_FORMAT);
                         return date.getMonthValue() == (monthIndex + 1); // back to 1–12
                     } catch (Exception e) {
                         return false;
@@ -315,14 +254,49 @@ public class Attendance extends javax.swing.JPanel {
                 }
             });
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_MonthPickerActionPerformed
+
+    private void logOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutActionPerformed
+        // TODO add your handling code here:
+        String name = empNameA.getText().trim();
+        String empNo = empNumA.getText().trim();
+
+        if (!Attend.checkInput(name, empNo)) {
+            return;
+        }
+
+        // Get current date and time for logging out
+        LocalDate today = LocalDate.now();
+        LocalTime timeOut = LocalTime.now();
+
+        for (int i = 0; i < model.getRowCount(); i++) {
+            String rowEmpNo = model.getValueAt(i, 0).toString();
+            String rowName = model.getValueAt(i, 1).toString();
+            String rowDate = model.getValueAt(i, 2).toString();
+            String rowTimeOut = model.getValueAt(i, 4).toString();
+
+            if (rowDate.equals(today.format(DATE_FORMAT))
+                    && rowName.equals(name)
+                    && rowEmpNo.equals(empNo)
+                    && rowTimeOut.isEmpty()) {
+
+                model.setValueAt(timeOut.format(TIME_FORMAT), i, 4);
+                JOptionPane.showMessageDialog(null, "Logged out successfully!");
+                empNameA.setText("");
+                empNumA.setText("");
+                return;
+            }
+        }
+        // If no matching record is found
+        JOptionPane.showMessageDialog(null, "No matching login record found for logout.");
+    }//GEN-LAST:event_logOutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> MonthPicker;
     private javax.swing.JTextField empNameA;
     private javax.swing.JTextField empNumA;
     private com.mycompany.group7compprog.GradientPanel gradientPanel1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
